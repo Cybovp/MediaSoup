@@ -6,7 +6,6 @@ import Select from "react-select";
 
 const HomePage = () => {
     const [roomId, setRoonId] = useState(null);
-    const router = useRouter();
     const [audioDevices, setAudioDevices] = useState([]);
 	const [videoDevices, setVideoDevices] = useState([]);
     const [configData, setConfigData] = useState({});
@@ -48,6 +47,17 @@ const HomePage = () => {
                     </input>
                 </div>
                 <div className={style.input}>
+                    <label style={{display: 'block'}}>Please Enter your avatar link ( if you have any ):</label>
+                    <input style={{width: '100%'}} className={style.input_text} type="text" 
+                        onChange={(e) => 
+                            setConfigData((prev)=>({
+                                ...prev,
+                                avatar: e.target.value,
+                            }))
+                        }>
+                    </input>
+                </div>
+                <div className={style.input}>
                     <label style={{display: 'block'}}>Please Select your camera:</label>
                     {videoDevices && <Select 
                         options={videoDevices.map(opt => ({
@@ -82,7 +92,14 @@ const HomePage = () => {
                     />}
                 </div>
                 <div className={style.button}>
-                    <a style={{color: '#000'}} href={`/meetingRoom?room=${roomId}&name=${configData.name}&video=${configData.video}&audio=${configData.audio}`}>Enter</a>
+                    <a style={{color: '#000'}} 
+                        href={ 
+                            configData.avatar 
+                            ? `/meetingRoom?room=${roomId}&name=${configData.name}&video=${configData.video}&audio=${configData.audio}&avatar=${configData.avatar}`
+                            : `/meetingRoom?room=${roomId}&name=${configData.name}&video=${configData.video}&audio=${configData.audio}`
+                        }>
+                        Enter
+                    </a>
                 </div>
             </div>
         </div>

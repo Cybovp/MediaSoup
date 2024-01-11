@@ -45,7 +45,7 @@ let consumingTransports = [];
 let consumerTransports = [];
 let screenShareProducer;
 let isSetBaseMedia = false;
-export default function meetingRoom({ room,name,video,audio }) {
+export default function meetingRoom({ room,name,video,audio,avatar }) {
 	
 	const [myScreenVideo, setMyScreenVideo] = useState();
 	const [myScreenAudio, setMyScreenAudio] = useState();
@@ -240,6 +240,14 @@ export default function meetingRoom({ room,name,video,audio }) {
 									setArrayEmotion([]);
 								}, 4000);
 					});
+
+					socket.on('joinRoomPermission', ({name}, callback) => {
+						if(confirm(`Allow ${name} to join?`)){
+							callback({allow: true});
+						}else{
+							callback({allow: false});
+						}
+					})
 					let stream
 					if(audio && video){
 						stream = await navigator.mediaDevices.getUserMedia({
@@ -291,19 +299,20 @@ export default function meetingRoom({ room,name,video,audio }) {
 					screenShareProducer = await producerTransport.produce(
 						screenShareParams
 					);
-
+					screenShareProducer.on('trackended', () => {
+						setIsShareScreen(false);
+					})
 					// Hiển thị video màn hình trong giao diện
 					setMyScreenVideo(stream);
 					setIsGrid(false);
 				} else if (socket) {
 					isSetBaseMedia = false;
 					// Dừng tất cả các producers của video màn hình
-					if(screenShareProducer) {await screenShareProducer.close();
-
-					socket.emit('start-unshare-screen');
-
-					setMyScreenVideo();
-					setIsGrid(true);
+					if(screenShareProducer) {
+						await screenShareProducer.close();
+						socket.emit('start-unshare-screen');
+						setMyScreenVideo();
+						setIsGrid(true);
 					}
 				}
 			} catch (e) {
@@ -329,7 +338,7 @@ export default function meetingRoom({ room,name,video,audio }) {
 		joinRoom();
 	};
 	const joinRoom = () => {
-		socket.emit('joinRoom', { roomName: room, name: name }, (data) => {
+		socket.emit('joinRoom', { roomName: room, name: name, avatar: avatar }, (data) => {
 			console.log(`Router RTP Capabilities... ${data.rtpCapabilities}`);
 			// we assign to local variable and will be used when
 			// loading the client Device (see createDevice above)
@@ -338,7 +347,6 @@ export default function meetingRoom({ room,name,video,audio }) {
 			createDevice();
 		});
 	};
-
 	// A device is an endpoint connecting to a Router on the
 	// server side to send/recive media
 	const createDevice = async () => {
@@ -582,8 +590,11 @@ export default function meetingRoom({ room,name,video,audio }) {
 						activeVideo: params.activeVideo,
 						activeAudio: params.activeAudio,
 						raiseHand: params.raiseHand,
+						userName: params.userName,
+						isAdmin: params.isAdmin,
+						avatar: params.avatar,
 					};
-					setArrayMedia((pev) => [...pev, data]);
+					setArrayMedia((prev) => [...prev, data]);
 				}
 
 				// the server consumer started with media paused
@@ -679,6 +690,7 @@ export default function meetingRoom({ room,name,video,audio }) {
 		if(stop){
 			myMedia.getVideoTracks()[0].stop();
 			myMedia.removeTrack(myMedia.getVideoTracks()[0]);
+			await videoProducer.pause();
 		}else{
 			const newstream = await navigator.mediaDevices.getUserMedia({
 				// audio: { deviceId: { exact: audio }},
@@ -690,33 +702,21 @@ export default function meetingRoom({ room,name,video,audio }) {
 				},
 			});
 			myMedia.addTrack(newstream.getVideoTracks()[0])
-			const newVideoParams = {
-				id: newstream.id,
-				track: newstream.getVideoTracks()[0],
-				...params,
-			};
-			videoProducer = await producerTransport.produce(newVideoParams);
-			// setMyMedia(newstream);
-			socket.emit('resume-produce-after-turnoff', { producerId: videoId })
+			await videoProducer.replaceTrack({track: newstream.getVideoTracks()[0]})
 		}
 	}
 	const stopAudio = async (stop) => {
 		if(stop){
 			myMedia.getAudioTracks()[0].stop();
 			myMedia.removeTrack(myMedia.getAudioTracks()[0]);
+			await audioProducer.pause();
 		}else{
 			const newstream = await navigator.mediaDevices.getUserMedia({
 				audio: { deviceId: { exact: audio }},
 				video: false
 			});
 			myMedia.addTrack(newstream.getAudioTracks()[0])
-			const newAudioParams = {
-				id: newstream.id,
-				track: newstream.getAudioTracks()[0],
-			};
-			audioProducer = await producerTransport.produce(newAudioParams);
-			// setMyMedia(newstream);
-			socket.emit('resume-produce-after-turnoff', { producerId: audioId })
+			await audioProducer.replaceTrack({track: newstream.getAudioTracks()[0]})
 		}
 	}
 	const props = {
@@ -746,13 +746,16 @@ export default function meetingRoom({ room,name,video,audio }) {
 		allowRaiseHand,
 		stopCall,
 		stopVideo,
-		stopAudio
+		stopAudio,
 	};
 	return (
 		<Layout {...props}>
-			<button onClick={() => {
-				
-			}}>test</button>
+			{/* <button onClick={() => {
+				console.log(screenShareProducer)
+			}}>test</button> */}
+			<div style={{position: 'absolute', top: '20px', left: '20px', zIndex: '9999'}}>
+				<p style={{color: '#FFF'}}>Room: {room}</p>
+			</div>
 			<div style={{ height: '100%' }} className='position-relative'>
 				<div>
 					{arrayEmotion.map((item, index) => (
@@ -780,12 +783,23 @@ export default function meetingRoom({ room,name,video,audio }) {
 										} d-flex position-relative algin-items-center justify-content-center`}
 										key={item.id}>
 										{item.activeVideo ? (
-											<Video srcObject={item.srcObject}></Video>
+											<>
+												<Video flip srcObject={item.srcObject} ></Video>
+											</>
 										) : (
-											<img
-												className={` rounded-circle m-4`}
-												style={{ width: '50%' }}
-												src='https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'></img>
+											<div style={{
+												textAlign: 'center',
+												// width: '100%',
+												// height: '100%',
+											}}>
+												<img
+													className={` rounded-circle `}
+													style={{ width: '50%'}}
+													// style={{objectFit: 'contain'}}
+													src={item.avatar ? item.avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
+												</img>
+												<p style={{color: '#FFF',textAlign: 'center', fontWeight: 'bold'}}>{item.userName}</p>
+											</div>
 										)}
 										{
 								item.raiseHand ? <span className={styles.icon_hand}>{postIcon[74]}</span> : ''
@@ -824,10 +838,11 @@ export default function meetingRoom({ room,name,video,audio }) {
 									<img
 										className={`rounded-circle`}
 										style={{ height: '50%' }}
-										src='https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'></img>
+										src={avatar ? avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
+									</img>
 								</div>
 							) : (
-								<Video srcObject={myMedia}></Video>
+								<Video flip srcObject={myMedia}></Video>
 							)}
 							{
 								raiseHand ? <span className={styles.icon_hand}>{postIcon[74]}</span> : ''
@@ -863,11 +878,11 @@ export default function meetingRoom({ room,name,video,audio }) {
 									<img
 										className={`rounded-circle`}
 										style={{ height: '50%' }}
-										src='https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'></img>
+										src={avatar ? avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}></img>
 								</div>
 							) : (
 								<Video
-									srcObject={!isShareScreen ? myMedia : myScreenVideo}></Video>
+								 flip={!isShareScreen} srcObject={!isShareScreen ? myMedia : myScreenVideo}></Video>
 							)
 							}
 							{
@@ -904,12 +919,28 @@ export default function meetingRoom({ room,name,video,audio }) {
 										}}
 										key={item.id}>
 										{item.activeVideo ? (
-											<Video srcObject={item.srcObject}></Video>
+											<>
+												<Video flip srcObject={item.srcObject}></Video>
+											</>
 										) : (
-											<img
-												className={`rounded-circle`}
-												style={{ height: '50%' }}
-												src='https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'></img>
+											<div style={{
+												display: 'flex',
+												justifyContent: 'center',
+												width: '100%',
+												height: '100%',
+												backgroundColor: '#000',
+												alignItems: 'center',
+												flexDirection: 'column',
+												borderRadius: '20px',
+											}}>
+												<img
+													className={` rounded-circle`}
+													style={{ maxWidth: '50%', maxHeight: '50%' }}
+													// style={{objectFit: 'contain'}}
+													src={item.avatar ? item.avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
+												</img>
+												<p style={{color: '#FFF', textAlign: 'center', fontWeight: 'bold'}}>{item.userName}</p>
+											</div>
 										)}
 										{
 								item.raiseHand ? <span className={styles.icon_hand}>{postIcon[74]}</span> : ''
@@ -938,11 +969,12 @@ export default function meetingRoom({ room,name,video,audio }) {
 }
 
 meetingRoom.getInitialProps = async (ctx) => {
-	const { room, name, video, audio } = ctx.query;
+	const { room, name, video, audio, avatar } = ctx.query;
 	return {
 		room,
 		name,
 		video,
 		audio,
+		avatar
 	};
 };
