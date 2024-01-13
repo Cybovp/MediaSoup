@@ -13,8 +13,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
 			<Head>
-					<title>Chat365</title>
+					<title>Conference app</title>
 					<link rel='icon' href='/icon_365.png' />
+					<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 			</Head>
 					<Script
 						src='https://kit.fontawesome.com/41f7b0205e.js'

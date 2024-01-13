@@ -181,9 +181,9 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 
 		// Cleanup socket connection when the component is unmounted
 		return () => {
-			if (socket) {
-				socket.disconnect();
-			}
+			// if (socket) {
+			// 	socket.disconnect();
+			// }
 		};
 	}, []);
 	useEffect(() => {
