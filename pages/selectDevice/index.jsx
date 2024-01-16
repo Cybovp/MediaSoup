@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation'
 import * as Yup from "yup";
 
 const selectDevice = ({roomId}) => {
-    const [audioDevices, setAudioDevices] = useState([]);
-	const [videoDevices, setVideoDevices] = useState([]);
+    const [audioDevices, setAudioDevices] = useState();
+	const [videoDevices, setVideoDevices] = useState();
     const [configData, setConfigData] = useState({
         roomId: roomId
     });
@@ -28,19 +28,38 @@ const selectDevice = ({roomId}) => {
     useEffect(()=>{
         const initDevices = async () => {
             const devices = await navigator.mediaDevices.enumerateDevices();
-            const videoDevices = devices.filter(
-                (device) => device.kind === 'videoinput' && device.deviceId !== ''
-            );
-            const audioDevices = devices.filter(
-                (device) => device.kind === 'audioinput' && device.deviceId !== ''
-            );
-            setVideoDevices(videoDevices)
-            setAudioDevices(audioDevices)
+            if(devices.length > 0){
+                const videoDevices = devices.filter(
+                    (device) => device.kind === 'videoinput' && device.deviceId !== ''
+                );
+                const audioDevices = devices.filter(
+                    (device) => device.kind === 'audioinput' && device.deviceId !== ''
+                );
+                setVideoDevices(videoDevices)
+                setAudioDevices(audioDevices)
+            }
         }
         initDevices()
         return () => {
         }
     },[]);
+    useEffect(() => {
+        if(videoDevices && videoDevices.length > 0 && audioDevices && audioDevices.length > 0){
+            setConfigData(prev=>({
+                ...prev,
+                video: videoDevices[0].deviceId,
+                audio: audioDevices[0].deviceId,
+            }))
+        }
+    },[videoDevices,audioDevices])
+    const videoDevicesOptions = videoDevices && videoDevices.length > 0 && videoDevices?.map(opt => ({
+        label: opt.label,
+        value: opt.deviceId
+    }))
+    const audioDevicesOptions = audioDevices && audioDevices.length > 0 && audioDevices?.map(opt => ({
+        label: opt.label,
+        value: opt.deviceId
+    }))
     return (
         <div className={style.container}>
             <div className={style.form_container}>
@@ -76,11 +95,8 @@ const selectDevice = ({roomId}) => {
                 </div>
                 <div className={style.input}>
                     <label style={{display: 'block',fontWeight: 'bold'}}>Thiết bị camera <span style={{color: 'red'}}>*</span></label>
-                    {videoDevices && <Select 
-                        options={videoDevices.map(opt => ({
-                            label: opt.label,
-                            value: opt.deviceId
-                        }))}
+                    {videoDevicesOptions && <Select 
+                        options={videoDevicesOptions}
                         placeholder={'Hãy chọn Camera'}
                         styles={customStyles}
                         onChange={(e)=>{
@@ -89,6 +105,7 @@ const selectDevice = ({roomId}) => {
                                 video: e.value,
                             }))
                         }}
+                        defaultValue={videoDevicesOptions[0]}
                     />}
                     {errors.video && (
                         <p style={{ color: "red", margin: "10px 10px 0 0" }}>
@@ -98,11 +115,8 @@ const selectDevice = ({roomId}) => {
                 </div>
                 <div className={style.input}>
                     <label style={{display: 'block',fontWeight: 'bold'}}>Thiết bị microphone <span style={{color: 'red'}}>*</span></label>
-                    {audioDevices && <Select 
-                        options={audioDevices.map(opt => ({
-                            label: opt.label,
-                            value: opt.deviceId
-                        }))}
+                    {audioDevicesOptions && <Select 
+                        options={audioDevicesOptions}
                         placeholder={'Hãy chọn Micro'}
                         styles={customStyles}
                         onChange={(e)=>{
@@ -111,6 +125,7 @@ const selectDevice = ({roomId}) => {
                                 audio: e.value,
                             }))
                         }}
+                        defaultValue={audioDevicesOptions[0]}
                     />}
                     {errors.audio && (
                         <p style={{ color: "red", margin: "10px 10px 0 0" }}>

@@ -181,9 +181,9 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 
 		// Cleanup socket connection when the component is unmounted
 		return () => {
-			// if (socket) {
-			// 	socket.disconnect();
-			// }
+			if (socket) {
+				socket.disconnect();
+			}
 		};
 	}, []);
 	useEffect(() => {
@@ -285,7 +285,6 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 					const stream = await navigator.mediaDevices.getDisplayMedia({
 						video: true,
 					});
-					const videoTrack = stream.getVideoTracks()[0];
 
 					// Tạo một producer mới cho video màn hình
 					const screenShareParams = {
@@ -305,7 +304,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 					// Hiển thị video màn hình trong giao diện
 					setMyScreenVideo(stream);
 					setIsGrid(false);
-				} else if (socket) {
+				} else if (socket && isSetBaseMedia == true) {
 					isSetBaseMedia = false;
 					// Dừng tất cả các producers của video màn hình
 					if(screenShareProducer) {

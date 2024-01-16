@@ -867,10 +867,10 @@ export default function footer({ ...props }) {
 						alignItems: 'center',
 						justifyContent: 'center',
 					}}>
-						{`/selectDevice/${props.room}`} 
+						{`https://hungha365.com/meet/selectDevice/${props.room}`} 
 						<span style={{marginLeft: '10px', cursor: 'pointer'}} className="material-symbols-outlined"
 							onClick={()=>{
-								navigator.clipboard.writeText(`/selectDevice/${props.room}`)
+								navigator.clipboard.writeText(`https://hungha365.com/meet/selectDevice/?roomId=${props.room}`)
 								setCopySuccessNotification2(true);
 								setTimeout(()=>{
 									setCopySuccessNotification2(false);

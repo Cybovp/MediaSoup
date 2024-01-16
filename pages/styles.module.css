@@ -188,6 +188,8 @@
     'opsz' 24
 }
 .container{
+    background: url(https://img.freepik.com/free-vector/simple-white-abstract-gradient-background_53876-99910.jpg?size=626&ext=jpg) no-repeat;
+    background-size: 100% 100%;
     margin-left: 0;
     height: auto;
     position: relative;
