@@ -408,3 +408,35 @@
     pointer-events: none;
     color: var(--gm-colortextbutton-disabled-ink-color,rgba(60,64,67,.38));
 }
+@media (max-width:900px){
+    .dateParrent{
+        display: none;
+    }
+    .leftHeader{
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+    .leftDetailText{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .leftActionArea{
+        flex-direction: column;
+    }
+    .createRoomContainer{
+        text-align: center;
+    }
+    .joinRoomArea{
+        padding-left: 10px;
+        padding-right: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .createRoomButton{
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}

@@ -108,7 +108,7 @@ const HomePage = () => {
                                     Tích hợp với các ứng dụng trong hệ sinh thái 365.
                                 </div>
                                 <div className={style.leftDetailText}>
-                                    Giao diện thân thiện, dễ làm quen, đảm bảo tối ưu chất lượng cuộc họp
+                                    Giao diện thân thiện, dễ làm quen, đảm bảo tối ưu chất lượng cuộc họp.
                                 </div>
                                 <div className={style.leftActionContainer}>
                                     <div className={style.leftActionArea}>

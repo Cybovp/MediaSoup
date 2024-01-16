@@ -747,6 +747,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 		stopCall,
 		stopVideo,
 		stopAudio,
+		room,
 	};
 	return (
 		<Layout {...props}>

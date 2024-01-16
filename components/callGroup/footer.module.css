@@ -353,3 +353,36 @@
   .option_choice_camera{
     top: calc(100% + 4px);
   }
+  .eclipseRectangle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 20px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+@media (max-width:900px){
+  .function_coverer{
+    height: 60px;
+  }
+  .container{
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+  .firstArea{
+    align-items: center;
+  }
+  .setting_change{
+    justify-content: flex-end;
+  }
+  .modal_icon{
+    top: calc(-50%);
+    overflow: visible !important;
+  }
+  .shareScreen{
+    margin-left: 0!important;
+  }
+}

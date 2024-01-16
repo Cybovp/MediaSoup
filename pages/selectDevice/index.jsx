@@ -60,7 +60,7 @@ const selectDevice = ({roomId}) => {
                     )}
                 </div> */}
                 <div className={style.input}>
-                    <label style={{display: 'block'}}>Tên của bạn <span style={{color: 'red'}}>*</span></label>
+                    <label style={{display: 'block',fontWeight: 'bold'}}>Tên của bạn <span style={{color: 'red'}}>*</span></label>
                     <input placeholder="  Hãy điền tên của bạn" style={{width: '100%'}} className={style.input_text} type="text" 
                         onChange={(e) => 
                             setConfigData((prev)=>({
@@ -75,7 +75,7 @@ const selectDevice = ({roomId}) => {
                     )}
                 </div>
                 <div className={style.input}>
-                    <label style={{display: 'block'}}>Thiết bị camera <span style={{color: 'red'}}>*</span></label>
+                    <label style={{display: 'block',fontWeight: 'bold'}}>Thiết bị camera <span style={{color: 'red'}}>*</span></label>
                     {videoDevices && <Select 
                         options={videoDevices.map(opt => ({
                             label: opt.label,
@@ -97,7 +97,7 @@ const selectDevice = ({roomId}) => {
                     )}
                 </div>
                 <div className={style.input}>
-                    <label style={{display: 'block'}}>Thiết bị microphone <span style={{color: 'red'}}>*</span></label>
+                    <label style={{display: 'block',fontWeight: 'bold'}}>Thiết bị microphone <span style={{color: 'red'}}>*</span></label>
                     {audioDevices && <Select 
                         options={audioDevices.map(opt => ({
                             label: opt.label,
@@ -119,7 +119,7 @@ const selectDevice = ({roomId}) => {
                     )}
                 </div>
                 <div className={style.input}>
-                    <label style={{display: 'block'}}>Link dẫn đến hình avatar của bạn (nếu có)</label>
+                    <label style={{display: 'block',fontWeight: 'bold'}}>Link dẫn đến hình avatar của bạn (nếu có)</label>
                     <input style={{width: '100%'}} className={style.input_text} type="text" 
                         onChange={(e) => 
                             setConfigData((prev)=>({
@@ -147,7 +147,7 @@ const selectDevice = ({roomId}) => {
                         }
                     }}
                     >
-                    Join
+                    Tham gia ngay
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
 			<Head>
-					<title>Conference app</title>
+					<title>Meeting365</title>
 					<link rel='icon' href='/icon_365.png' />
 					<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 			</Head>

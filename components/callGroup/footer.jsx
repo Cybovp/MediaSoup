@@ -1,5 +1,5 @@
 import styles from './footer.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import Image from 'next/image';
 import Video from '@/components/video';
@@ -36,7 +36,17 @@ export default function footer({ ...props }) {
 	const allowShareScreen = props.allowShareScreen;
 	const [raiseHand, setRaiseHand] = [props.raiseHand, props.setRaiseHand];
 	const [showOptionEmotion, setShowOptionEmotion] = useState(false);
-
+	const [copySuccessNotification, setCopySuccessNotification] = useState(false);
+	const [copySuccessNotification2, setCopySuccessNotification2] = useState(false);
+	const [windowWidth, setWindowWidth] = useState(0);
+	const [showModalFunctionArea1, setShowModalFunctionArea1] = useState(false);
+	const [showModalFunctionArea2, setShowModalFunctionArea2] = useState(false);
+	useEffect(()=>{
+		if (typeof window !== 'undefined') {
+			setWindowWidth(window.innerWidth);
+			window.addEventListener('resize', () => setWindowWidth(window.innerWidth));
+		}
+	},[])
 	const changeDisplay = () => {
 		setIsGrid(!isGrid);
 	};
@@ -110,84 +120,173 @@ export default function footer({ ...props }) {
 		setIsMicro(isMicroSetting);
 		setShowModalSetting(false);
 	};
-
+	const handleCloseModalFunctionArea1 = () => {
+		setShowModalFunctionArea1(!showModalFunctionArea1)
+	}
+	const handleCloseModalFunctionArea2 = () => {
+		setShowModalFunctionArea2(!showModalFunctionArea2)
+	}
 	return (
 		<div className={`${styles.function_coverer}`}>
-			<div className='d-flex flex-row align-items-center h-100 w-100 px-4 justify-content-between'>
-				<div className='d-flex'>
-					<Button
-						className={`text-center rounded-circle d-flex justify-content-center align-items-center fs-4 ${styles.add_member}`}
-						onClick={handleOpenModalAddMember}>
-						<i
-							className={`fa-solid fa-user-plus color_light p-1 m_0_5 ${styles.add_member_icon}`}></i>
-					</Button>
-					<Button
-						className='bg-secondary border-0 ms-5 d-flex align-items-center justify-content-center'
-						onClick={(e) => setIsShareScreen(!isShareScreen)}
-						disabled={!allowShareScreen}>
-						{isShareScreen ? (
-							<Image
-								src='./icon/share.svg'
-								width={30}
-								height={30}
-								alt='share screen'></Image>
-						) : (
-							<Image
-								src='./icon/share1.svg'
-								alt='do not show screen'
-								width={30}
-								height={30}></Image>
-						)}
-					</Button>
-					<Button
-						className={`${
-							styles.grid_icon_cover
-						} position-relative fs-4 d-flex align-items-center justify-content-center ${
-							!showOptionEmotion ? 'bg-transparent' : 'bg-secondary'
-						} p-2 border-0 ms-4`}>
-						<span
-							onClick={() => setShowOptionEmotion(!showOptionEmotion)}>{postIcon[78]}</span>
-						<div
-							className={`${showOptionEmotion ? 'd-block' : 'd-none'} ${
-								styles.modal_icon
-							} position-absolute`}>
-							<ul className='d-flex flex-row justify-content-around bg-black p-1 rounded'>
-								<li className='px-1' onClick={changeEmotion} >
-									<span data='75'>{postIcon[75]}</span>
-								</li>
-								<li className='px-1'  onClick={changeEmotion} >
-									<span data='6'>{postIcon[6]}</span>
-								</li>
-								<li className='px-1'  onClick={changeEmotion} >
-									<span data='11'>{postIcon[11]}</span>
-								</li>
-								<li className='px-1'  onClick={changeEmotion} >
-									<span data='33'>{postIcon[33]}</span>
-								</li>
-								<li className='px-1'  onClick={changeEmotion} >
-									<span data='61'>{postIcon[61]}</span>
-								</li>
-								<li className='px-1'  onClick={changeEmotion} >
-									<span data='77'>{postIcon[77]}</span>
-								</li>
-								<li className='px-1'  onClick={changeEmotion}>
-									<span data='78'>{postIcon[78]}</span>
-								</li>
-							</ul>
-						</div>
-					</Button>
-					<Button
-						className={`${
-							styles.hand_icon_cover
-						} fs-4 d-flex align-items-center justify-content-center ${
-							!raiseHand ? 'bg-transparent' : 'bg-light'
-						} border-1 border-secondary ms-4`}
-						onClick={() => setRaiseHand(!raiseHand)}
-						disabled={!props.allowRaiseHand}
-						>
-						<span>{postIcon[74]}</span>
-					</Button>
-				</div>
+			<div className={`d-flex flex-row align-items-center h-100 w-100 ${windowWidth && windowWidth > 900 && 'px-4'} justify-content-between ${styles.container}`}>
+				{(windowWidth && windowWidth > 900) ? (
+					<div className={`d-flex ${styles.firstArea}`}>
+						<Button
+							className={`text-center rounded-circle d-flex justify-content-center align-items-center fs-4 ${styles.add_member}`}
+							onClick={handleOpenModalAddMember}>
+							<i
+								className={`fa-solid fa-user-plus color_light p-1 m_0_5 ${styles.add_member_icon}`}></i>
+						</Button>
+						<Button
+							className={'bg-secondary border-0 ms-5 d-flex align-items-center justify-content-center ' + styles.shareScreen}
+							onClick={(e) => setIsShareScreen(!isShareScreen)}
+							disabled={!allowShareScreen}>
+							{isShareScreen ? (
+								<Image
+									src='./icon/share.svg'
+									width={30}
+									height={30}
+									alt='share screen'></Image>
+							) : (
+								<Image
+									src='./icon/share1.svg'
+									alt='do not show screen'
+									width={30}
+									height={30}></Image>
+							)}
+						</Button>
+						<Button
+							className={`${
+								styles.grid_icon_cover
+							} position-relative fs-4 d-flex align-items-center justify-content-center ${
+								!showOptionEmotion ? 'bg-transparent' : 'bg-secondary'
+							} p-2 border-0 ms-4`}>
+							<span
+								onClick={() => setShowOptionEmotion(!showOptionEmotion)}>{postIcon[78]}</span>
+							<div
+								className={`${showOptionEmotion ? 'd-block' : 'd-none'} ${
+									styles.modal_icon
+								} position-absolute`}>
+								<ul className='d-flex flex-row justify-content-around bg-black p-1 rounded'>
+									<li className='px-1' onClick={changeEmotion} >
+										<span data='75'>{postIcon[75]}</span>
+									</li>
+									<li className='px-1'  onClick={changeEmotion} >
+										<span data='6'>{postIcon[6]}</span>
+									</li>
+									<li className='px-1'  onClick={changeEmotion} >
+										<span data='11'>{postIcon[11]}</span>
+									</li>
+									<li className='px-1'  onClick={changeEmotion} >
+										<span data='33'>{postIcon[33]}</span>
+									</li>
+									<li className='px-1'  onClick={changeEmotion} >
+										<span data='61'>{postIcon[61]}</span>
+									</li>
+									<li className='px-1'  onClick={changeEmotion} >
+										<span data='77'>{postIcon[77]}</span>
+									</li>
+									<li className='px-1'  onClick={changeEmotion}>
+										<span data='78'>{postIcon[78]}</span>
+									</li>
+								</ul>
+							</div>
+						</Button>
+						<Button
+							className={`${
+								styles.hand_icon_cover
+							} fs-4 d-flex align-items-center justify-content-center ${
+								!raiseHand ? 'bg-transparent' : 'bg-light'
+							} border-1 border-secondary ms-4`}
+							onClick={() => setRaiseHand(!raiseHand)}
+							disabled={!props.allowRaiseHand}
+							>
+							<span>{postIcon[74]}</span>
+						</Button>
+					</div>
+				) : (
+					<>
+						<Modal style={{top: '70%'}} show={showModalFunctionArea1} onHide={handleCloseModalFunctionArea1}>
+							<Modal.Body style={{backgroundColor: '#000'}}>
+								<div className={`d-flex ${styles.firstArea}`}>
+									<Button
+										className={`text-center rounded-circle d-flex justify-content-center align-items-center fs-4 ${styles.add_member}`}
+										onClick={handleOpenModalAddMember}>
+										<i
+											className={`fa-solid fa-user-plus color_light p-1 m_0_5 ${styles.add_member_icon}`}></i>
+									</Button>
+									<Button
+										className={'bg-secondary border-0 ms-5 d-flex align-items-center justify-content-center ' + styles.shareScreen}
+										onClick={(e) => setIsShareScreen(!isShareScreen)}
+										disabled={!allowShareScreen}>
+										{isShareScreen ? (
+											<Image
+												src='./icon/share.svg'
+												width={30}
+												height={30}
+												alt='share screen'></Image>
+										) : (
+											<Image
+												src='./icon/share1.svg'
+												alt='do not show screen'
+												width={30}
+												height={30}></Image>
+										)}
+									</Button>
+									<Button
+										className={`${
+											styles.grid_icon_cover
+										} position-relative fs-4 d-flex align-items-center justify-content-center ${
+											!showOptionEmotion ? 'bg-transparent' : 'bg-secondary'
+										} p-2 border-0 ms-4`}>
+										<span
+											onClick={() => setShowOptionEmotion(!showOptionEmotion)}>{postIcon[78]}</span>
+										<div
+											className={`${showOptionEmotion ? 'd-block' : 'd-none'} ${
+												styles.modal_icon
+											} position-absolute`}>
+											<ul className='d-flex flex-row justify-content-around bg-black p-1 rounded'>
+												<li className='px-1' onClick={changeEmotion} >
+													<span data='75'>{postIcon[75]}</span>
+												</li>
+												<li className='px-1'  onClick={changeEmotion} >
+													<span data='6'>{postIcon[6]}</span>
+												</li>
+												<li className='px-1'  onClick={changeEmotion} >
+													<span data='11'>{postIcon[11]}</span>
+												</li>
+												<li className='px-1'  onClick={changeEmotion} >
+													<span data='33'>{postIcon[33]}</span>
+												</li>
+												<li className='px-1'  onClick={changeEmotion} >
+													<span data='61'>{postIcon[61]}</span>
+												</li>
+												<li className='px-1'  onClick={changeEmotion} >
+													<span data='77'>{postIcon[77]}</span>
+												</li>
+												<li className='px-1'  onClick={changeEmotion}>
+													<span data='78'>{postIcon[78]}</span>
+												</li>
+											</ul>
+										</div>
+									</Button>
+									<Button
+										className={`${
+											styles.hand_icon_cover
+										} fs-4 d-flex align-items-center justify-content-center ${
+											!raiseHand ? 'bg-transparent' : 'bg-light'
+										} border-1 border-secondary ms-4`}
+										onClick={() => setRaiseHand(!raiseHand)}
+										disabled={!props.allowRaiseHand}
+										>
+										<span>{postIcon[74]}</span>
+									</Button>
+								</div>
+							</Modal.Body>
+						</Modal>
+						<Image style={{marginLeft:'10px'}} onClick={()=>setShowModalFunctionArea1(true)} src='/svg/more_vert.svg' width={30} height={60}/>
+					</>
+				)}
 				<div className={`${styles.main_footer} d-flex flex-row algin-item`}>
 					<div
 						className={`${styles.function_camera} border border-1 border-primary rounded-pill d-inline-flex px-2`}>
@@ -292,125 +391,243 @@ export default function footer({ ...props }) {
 						</div>
 					</div>
 				</div>
-				<div className={`${styles.setting_change} d-flex `}>
-					<Button
-						className={`${styles.grid_icon_cover} fs-4 d-flex align-items-center justify-content-center bg-transparent border-0`}
-						onClick={changeDisplay}
-						disabled={isShareScreen}>
-						{isGrid ? (
-							<div>
-								<svg
-									width='36px'
-									height='36px'
-									viewBox='0 0 24 24'
-									fill='none'
-									xmlns='http://www.w3.org/2000/svg'
-									className={`${styles.grid_icon}`}>
-									<rect
-										x='0.5'
-										y='1.3'
-										width='10.2'
-										height='9.4'
-										rx='0.5'
-										fill='transparent'
-										stroke='#ffffffd0'
-									/>
-									<rect
-										x='13.3'
-										y='1.29996'
-										width='10.2'
-										height='9.4'
-										rx='0.5'
-										fill='inherit'
-										stroke='#ffffffd0'
-									/>
-									<rect
-										x='0.5'
-										y='13.3'
-										width='10.2'
-										height='9.4'
-										rx='0.5'
-										fill='inherit'
-										stroke='#ffffffd0'
-									/>
-									<rect
-										x='13.3'
-										y='13.3'
-										width='10.2'
-										height='9.4'
-										rx='0.5'
-										fill='transparent'
-										stroke='#ffffffd0'
-									/>
-								</svg>
-							</div>
-						) : (
-							<div>
-								<svg
-									width='36px'
-									height='36px'
-									viewBox='0 0 25 24'
-									fill='none'
-									xmlns='http://www.w3.org/2000/svg'
-									className={`${styles.grid_icon}`}>
-									<rect
-										x='1.5'
-										y='1.5'
-										width='13'
-										height='21'
-										rx='0.5'
-										fill='transparent'
-										stroke='#ffffffd0'
-									/>
-									<rect
-										x='17.5'
-										y='1.5'
-										width='7'
-										height='5'
-										rx='0.5'
-										fill='#ffffffd0'
-										stroke='#ffffffd0'
-									/>
-									<rect
-										x='17.5'
-										y='17.5'
-										width='7'
-										height='5'
-										rx='0.5'
-										fill='#ffffffd0'
-										stroke='#ffffffd0'
-									/>
-									<rect
-										x='17.5'
-										y='9.5'
-										width='7'
-										height='5'
-										rx='0.5'
-										fill='transparent'
-										stroke='#ffffffd0'
-									/>
-								</svg>
-							</div>
-						)}
-					</Button>
-					<Button
-						className={`${styles.setting_icon_cover} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
-						onClick={handleOpenModalSetting}>
-						<i
-							className={`fa-solid fa-gear color_light ${styles.setting_icon}`}></i>
-					</Button>
-				</div>
+				{(windowWidth && windowWidth > 900) ? (
+					<div className={`${styles.setting_change} d-flex `}>
+						<Button
+							className={`${styles.grid_icon_cover} fs-4 d-flex align-items-center justify-content-center bg-transparent border-0`}
+							onClick={changeDisplay}
+							disabled={isShareScreen}>
+							{isGrid ? (
+								<div>
+									<svg
+										width='36px'
+										height='36px'
+										viewBox='0 0 24 24'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+										className={`${styles.grid_icon}`}>
+										<rect
+											x='0.5'
+											y='1.3'
+											width='10.2'
+											height='9.4'
+											rx='0.5'
+											fill='transparent'
+											stroke='#ffffffd0'
+										/>
+										<rect
+											x='13.3'
+											y='1.29996'
+											width='10.2'
+											height='9.4'
+											rx='0.5'
+											fill='inherit'
+											stroke='#ffffffd0'
+										/>
+										<rect
+											x='0.5'
+											y='13.3'
+											width='10.2'
+											height='9.4'
+											rx='0.5'
+											fill='inherit'
+											stroke='#ffffffd0'
+										/>
+										<rect
+											x='13.3'
+											y='13.3'
+											width='10.2'
+											height='9.4'
+											rx='0.5'
+											fill='transparent'
+											stroke='#ffffffd0'
+										/>
+									</svg>
+								</div>
+							) : (
+								<div>
+									<svg
+										width='36px'
+										height='36px'
+										viewBox='0 0 25 24'
+										fill='none'
+										xmlns='http://www.w3.org/2000/svg'
+										className={`${styles.grid_icon}`}>
+										<rect
+											x='1.5'
+											y='1.5'
+											width='13'
+											height='21'
+											rx='0.5'
+											fill='transparent'
+											stroke='#ffffffd0'
+										/>
+										<rect
+											x='17.5'
+											y='1.5'
+											width='7'
+											height='5'
+											rx='0.5'
+											fill='#ffffffd0'
+											stroke='#ffffffd0'
+										/>
+										<rect
+											x='17.5'
+											y='17.5'
+											width='7'
+											height='5'
+											rx='0.5'
+											fill='#ffffffd0'
+											stroke='#ffffffd0'
+										/>
+										<rect
+											x='17.5'
+											y='9.5'
+											width='7'
+											height='5'
+											rx='0.5'
+											fill='transparent'
+											stroke='#ffffffd0'
+										/>
+									</svg>
+								</div>
+							)}
+						</Button>
+						<Button
+							className={`${styles.setting_icon_cover} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
+							onClick={handleOpenModalSetting}>
+							<i
+								className={`fa-solid fa-gear color_light ${styles.setting_icon}`}></i>
+						</Button>
+					</div>
+				): (
+					<>
+						<Modal style={{top: '70%'}} show={showModalFunctionArea2} onHide={handleCloseModalFunctionArea2}>
+							<Modal.Body style={{backgroundColor: '#000'}}>
+								<div className={`${styles.setting_change} d-flex `}>
+									<Button
+										className={`${styles.grid_icon_cover} fs-4 d-flex align-items-center justify-content-center bg-transparent border-0`}
+										onClick={changeDisplay}
+										disabled={isShareScreen}>
+										{isGrid ? (
+											<div>
+												<svg
+													width='36px'
+													height='36px'
+													viewBox='0 0 24 24'
+													fill='none'
+													xmlns='http://www.w3.org/2000/svg'
+													className={`${styles.grid_icon}`}>
+													<rect
+														x='0.5'
+														y='1.3'
+														width='10.2'
+														height='9.4'
+														rx='0.5'
+														fill='transparent'
+														stroke='#ffffffd0'
+													/>
+													<rect
+														x='13.3'
+														y='1.29996'
+														width='10.2'
+														height='9.4'
+														rx='0.5'
+														fill='inherit'
+														stroke='#ffffffd0'
+													/>
+													<rect
+														x='0.5'
+														y='13.3'
+														width='10.2'
+														height='9.4'
+														rx='0.5'
+														fill='inherit'
+														stroke='#ffffffd0'
+													/>
+													<rect
+														x='13.3'
+														y='13.3'
+														width='10.2'
+														height='9.4'
+														rx='0.5'
+														fill='transparent'
+														stroke='#ffffffd0'
+													/>
+												</svg>
+											</div>
+										) : (
+											<div>
+												<svg
+													width='36px'
+													height='36px'
+													viewBox='0 0 25 24'
+													fill='none'
+													xmlns='http://www.w3.org/2000/svg'
+													className={`${styles.grid_icon}`}>
+													<rect
+														x='1.5'
+														y='1.5'
+														width='13'
+														height='21'
+														rx='0.5'
+														fill='transparent'
+														stroke='#ffffffd0'
+													/>
+													<rect
+														x='17.5'
+														y='1.5'
+														width='7'
+														height='5'
+														rx='0.5'
+														fill='#ffffffd0'
+														stroke='#ffffffd0'
+													/>
+													<rect
+														x='17.5'
+														y='17.5'
+														width='7'
+														height='5'
+														rx='0.5'
+														fill='#ffffffd0'
+														stroke='#ffffffd0'
+													/>
+													<rect
+														x='17.5'
+														y='9.5'
+														width='7'
+														height='5'
+														rx='0.5'
+														fill='transparent'
+														stroke='#ffffffd0'
+													/>
+												</svg>
+											</div>
+										)}
+									</Button>
+									<Button
+										className={`${styles.setting_icon_cover} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
+										onClick={handleOpenModalSetting}>
+										<i
+											className={`fa-solid fa-gear color_light ${styles.setting_icon}`}></i>
+									</Button>
+								</div>
+							</Modal.Body>
+						</Modal>
+						<Image style={{marginRight:'10px'}} onClick={()=>setShowModalFunctionArea2(true)} src='/svg/more_vert.svg' width={30} height={60}/>
+					</>
+				)}
 			</div>
 			<Modal show={showModalAddMember} onHide={handleCloseModalAddMember}>
-				<Modal.Header
+				{/* <Modal.Header
 					closeButton
 					className={`${styles.modal_header} ps-3 pe-2 py-1`}>
 					<Modal.Title className={`${styles.modal_title}`}>
-						Thêm người vào cuộc họp
+						Chia sẻ cuộc họp
 					</Modal.Title>
-				</Modal.Header>
+				</Modal.Header> */}
 				<Modal.Body>
-					<search>
+					{/* <search>
 						<div
 							className={`rounded-pill border border-1 border-dark d-flex align-items-center pe-3 mb-3`}>
 							<i className='fa-solid fa-magnifying-glass ps-2 pe-1'></i>
@@ -614,7 +831,58 @@ export default function footer({ ...props }) {
 							</Button>
 							<Button className={`${styles.button_accept_member}`}>Thêm</Button>
 						</div>
-					</footer>
+					</footer> */}
+					<p>Cuộc họp đã sẵn sàng</p>
+					<p>Hãy chia sẻ cuộc họp với những người tham gia khác bằng mã dưới đây:</p>
+					<div style={{
+						display: 'flex',
+						textAlign: 'center',
+						backgroundColor: '#F5F5F5',
+						height: '50px',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}>
+						{props.room} 
+						<span style={{marginLeft: '10px', cursor: 'pointer'}} className="material-symbols-outlined"
+							onClick={()=>{
+								navigator.clipboard.writeText(props.room)
+								setCopySuccessNotification(true);
+								setTimeout(()=>{
+									setCopySuccessNotification(false);
+								},2000)
+							}}
+						>
+							content_copy
+						</span>
+					</div>
+					{copySuccessNotification && (
+						<p style={{textAlign: 'center', color: 'rgb(26,115,232)'}}>Đã sao chép vào khay nhớ tạm</p>
+					)}
+					<p>Hoặc đường link này:</p>
+					<div style={{
+						display: 'flex',
+						textAlign: 'center',
+						backgroundColor: '#F5F5F5',
+						height: '50px',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}>
+						{`/selectDevice/${props.room}`} 
+						<span style={{marginLeft: '10px', cursor: 'pointer'}} className="material-symbols-outlined"
+							onClick={()=>{
+								navigator.clipboard.writeText(`/selectDevice/${props.room}`)
+								setCopySuccessNotification2(true);
+								setTimeout(()=>{
+									setCopySuccessNotification2(false);
+								},2000)
+							}}
+						>
+							content_copy
+						</span>
+					</div>
+					{copySuccessNotification2 && (
+						<p style={{textAlign: 'center', color: 'rgb(26,115,232)'}}>Đã sao chép vào khay nhớ tạm</p>
+					)}
 				</Modal.Body>
 			</Modal>
 			<Modal show={showModalSetting} onHide={handleCloseModalSetting}>
