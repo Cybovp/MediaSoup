@@ -21,18 +21,18 @@ let params = {
 		{
 			rid: 'r0',
 			maxBitrate: 100000,
-			scalabilityMode: 'S1T3',
+			scalabilityMode: 'S3T3_KEY',
 		},
-		{
-			rid: 'r1',
-			maxBitrate: 300000,
-			scalabilityMode: 'S1T3',
-		},
-		{
-			rid: 'r2',
-			maxBitrate: 900000,
-			scalabilityMode: 'S1T3',
-		},
+		// {
+		// 	rid: 'r1',
+		// 	maxBitrate: 300000,
+		// 	scalabilityMode: 'S3T3_KEY',
+		// },
+		// {
+		// 	rid: 'r2',
+		// 	maxBitrate: 900000,
+		// 	scalabilityMode: 'S3T3_KEY',
+		// },
 	],
 	// https://mediasoup.org/documentation/v3/mediasoup-client/api/#ProducerCodecOptions
 	codecOptions: {
@@ -385,6 +385,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 			// creates a new WebRTC Transport to send media
 			// based on the server's producer transport params
 			// https://mediasoup.org/documentation/v3/mediasoup-client/api/#TransportOptions
+			params.iceParameters.iceRestart = true;
 			producerTransport = device.createSendTransport(params);
 
 			// https://mediasoup.org/documentation/v3/communication-between-client-and-server/#producing-media
@@ -475,9 +476,9 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 					console.log(params.error);
 					return;
 				}
-				console.log(`PARAMS... ${params}`);
-
-				let consumerTransport;
+				params.iceParameters.iceRestart = true;
+				console.log(`PARAMS... ${JSON.stringify(params, null, 2)}`);
+				let consumerTransport;	
 				try {
 					consumerTransport = device.createRecvTransport(params);
 				} catch (error) {

@@ -12,6 +12,7 @@ const selectDevice = ({roomId}) => {
         roomId: roomId
     });
     const [errors, setErrors] = useState({});
+    const [currentTime, setCurrentTime] = useState();
     const router = useRouter()
     const customStyles = {
         control: (provided) => ({
@@ -40,7 +41,21 @@ const selectDevice = ({roomId}) => {
             }
         }
         initDevices()
+        const intervalId = setInterval(() => {
+            let datenow = new Date();
+            const formattedTime = datenow.toLocaleTimeString('vn-VN', {
+                hour12: false, // Use 24-hour format
+              }).slice(0, -3);
+            
+            const formattedDate = datenow.toLocaleDateString('vn-VN', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'short',
+            });
+            setCurrentTime(`${formattedTime} • ${formattedDate}`);
+        }, 1000);
         return () => {
+            return () => clearInterval(intervalId);
         }
     },[]);
     useEffect(() => {
@@ -62,6 +77,76 @@ const selectDevice = ({roomId}) => {
     }))
     return (
         <div className={style.container}>
+            <div className={style.headerContainer}>
+                <header className={style.header}>
+                    <div className={style.headerChild}>
+                        <div className={style.logoContainer}>
+                            <div className={style.logoParrent}>
+                                <div className={style.logoChild}>
+                                    <div className={style.logo}>
+                                        <img className={style.logoImage} src={'https://hungha365.com/favicon/HH365.ico'}></img>
+                                        <span className={style.logoText}>Meeting365</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={style.dateContainer}>
+                            <div className={style.dateParrent}>
+                                <div className={style.dateChild}>
+                                    <div className={style.date}>
+                                        {currentTime}
+                                    </div>
+                                </div>
+                                <div className={style.dateChild}>
+                                    <div className={style.headerIcon}>
+                                        <div className={style.headerIconChild}>
+                                            <div>
+                                                <div className={style.headerIconChildDetail}>
+                                                    <div>
+                                                        <span>
+                                                            <button className={style.headerIconFirstChild}>
+                                                                <span className="material-symbols-outlined">
+                                                                    help
+                                                                </span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className={style.headerIconChildDetail}>
+                                                    <div>
+                                                        <span>
+                                                            <button className={style.headerIconSecondChild}>
+                                                                <span className="material-symbols-outlined">
+                                                                    chat_info
+                                                                </span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className={style.headerIconChildDetail}>
+                                                    <div>
+                                                        <span>
+                                                            <button className={style.headerIconThirdChild}>
+                                                                <span className="material-symbols-outlined">
+                                                                    settings
+                                                                </span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
             <div className={style.form_container}>
                 {/* <div className={style.input}>
                     <label style={{display: 'block'}}>ID của phòng họp <span style={{color: 'red'}}>*</span></label>
