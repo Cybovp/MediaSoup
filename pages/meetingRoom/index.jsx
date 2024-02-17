@@ -76,6 +76,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 	const [socket, setSocket] = useState(null);
 	const [allowRaiseHand, setAllowRaiseHand] = useState(true);
 	const [stream, setStream] = useState();
+	const [myVolume, setMyVolume] = useState();
 	useEffect(() => {
 		const initDevices = async () => {
 			if(!socket){ 
@@ -323,6 +324,28 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 	}, [isShareScreen]);
 	const streamSuccess = (stream) => {
 		setMyMedia(stream);
+		const audioCtx = new AudioContext();
+		const scriptProcessor = audioCtx.createScriptProcessor(4096, 1, 1); // Adjust buffer size (2^n) as needed
+		const mic = audioCtx.createMediaStreamSource(stream);
+		mic.connect(scriptProcessor);
+		scriptProcessor.connect(audioCtx.destination);
+		scriptProcessor.onaudioprocess = (event) => {
+			const inputBuffer = event.inputBuffer;
+			const data = inputBuffer.getChannelData(0); // Get first channel data
+		
+			// Calculate root mean square (RMS) to estimate volume
+			let rms = 0;
+			for (let i = 0; i < data.length; i++) {
+			rms += data[i] * data[i];
+			}
+			rms = Math.sqrt(rms / data.length);
+		
+			// Normalize and process the volume value (0-1)
+			const volume = Math.min(rms, 1);
+		
+			// Use the volume value for your application (e.g., display, visualization)
+			setMyVolume(volume);
+		};              
 		audioParams = {
 			id: stream.id,
 			track: stream.getAudioTracks()[0],
@@ -843,7 +866,10 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 									</img>
 								</div>
 							) : (
-								<Video flip srcObject={myMedia}></Video>
+								<>
+									<Video flip srcObject={myMedia}></Video>
+									<meter className={styles.meter}  max={1.0} min={0.0} value={myVolume*5} high={.75} low={.25} optimum={0.5} ></meter>
+								</>
 							)}
 							{
 								raiseHand ? <span className={styles.icon_hand}>{postIcon[74]}</span> : ''
@@ -883,8 +909,12 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 										src={avatar ? avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}></img>
 								</div>
 							) : (
-								<Video
-								 flip={!isShareScreen} srcObject={!isShareScreen ? myMedia : myScreenVideo}></Video>
+								<>
+									<Video flip={!isShareScreen} srcObject={!isShareScreen ? myMedia : myScreenVideo}></Video>
+									{!isShareScreen && (
+										<meter className={styles.big_meter}  max={1.0} min={0.0} value={myVolume*5} high={.75} low={.25} optimum={0.5} ></meter>
+									)}
+								</>
 							)
 							}
 							{

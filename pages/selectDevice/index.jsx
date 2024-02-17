@@ -111,7 +111,7 @@ const selectDevice = ({roomId}) => {
                     <Audio srcObject={testStream} flip></Audio>
                     <div className={style.meterArea}>
                         <span style={{marginRight: '5px'}} className="material-symbols-outlined">volume_up</span>
-                        <meter className={style.meter} max={1.0} min={0.0} value={testAudioVolume} high={.75} low={.25} optimum={0.5} ></meter>
+                        <meter className={style.meter} max={1.0} min={0.0} value={testAudioVolume*5} high={.75} low={.25} optimum={0.5} ></meter>
                     </div>
                     {/* <div className={style.soundLevel}>
                         <div className={style.levels}>

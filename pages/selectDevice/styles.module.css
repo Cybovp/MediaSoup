@@ -257,6 +257,7 @@
     width: 200px;
     border-radius: 5px;
 }
+
 .soundLevel {
     position: absolute;
     opacity: .6;
