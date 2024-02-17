@@ -21,18 +21,18 @@ let params = {
 		{
 			rid: 'r0',
 			maxBitrate: 100000,
-			scalabilityMode: 'S3T3_KEY',
+			scalabilityMode: 'S1T3',
 		},
-		// {
-		// 	rid: 'r1',
-		// 	maxBitrate: 300000,
-		// 	scalabilityMode: 'S3T3_KEY',
-		// },
-		// {
-		// 	rid: 'r2',
-		// 	maxBitrate: 900000,
-		// 	scalabilityMode: 'S3T3_KEY',
-		// },
+		{
+			rid: 'r1',
+			maxBitrate: 300000,
+			scalabilityMode: 'S1T3',
+		},
+		{
+			rid: 'r2',
+			maxBitrate: 900000,
+			scalabilityMode: 'S1T3',
+		},
 	],
 	// https://mediasoup.org/documentation/v3/mediasoup-client/api/#ProducerCodecOptions
 	codecOptions: {
@@ -79,7 +79,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 	useEffect(() => {
 		const initDevices = async () => {
 			if(!socket){ 
-			const socketInstance = io('ws://43.239.223.188:4000/mediasoup');
+			const socketInstance = io('https://groupcall.timviec365.vn/mediasoup');
 			try {
 				socketInstance.on('connection-success', async ({ socketId },callback) => {
 					const devices = await navigator.mediaDevices.enumerateDevices();
@@ -856,7 +856,8 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 									width={40}
 									height={40}></Image>
 							) : (
-								<Audio srcObject={myMedia}></Audio>
+								// <Audio srcObject={myMedia}></Audio>
+								<></>
 							)}
 						</div>
 					)}
@@ -890,7 +891,8 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 								raiseHand && !isShareScreen ? <span className={styles.icon_hand}>{postIcon[74]}</span> : ''
 							}
 							{isMicro ? (
-								<Audio srcObject={myMedia}></Audio>
+								// <Audio srcObject={myMedia}></Audio>
+								<></>
 							) : (
 								<Image
 									src='./icon/no_micro.svg'
