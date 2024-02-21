@@ -13,8 +13,8 @@ export default function video({ srcObject,flip }) {
       WebkitTransform: 'scaleX(-1)',
       transform: 'scaleX(-1)',
     }} 
-    autoPlay ref={videoRef} width='100%' height='100%' muted />
+    autoPlay playsInline ref={videoRef} width='100%' height='80%' muted />
     : <video 
-    autoPlay ref={videoRef} width='100%' height='100%' muted />
+    autoPlay playsInline ref={videoRef} width='100%' height='80%' muted />
     )
 }

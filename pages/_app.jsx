@@ -8,6 +8,9 @@ if (typeof document !== 'undefined') {
 import Head from 'next/head';
 import Script from 'next/script';
 import '@/styles/iconFlying.scss';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import 'react-notifications/lib/notifications.css';
 
 function MyApp({ Component, pageProps }) {
   return (

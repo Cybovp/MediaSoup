@@ -78,7 +78,10 @@
 .video_item{
   animation: fadeIn 1s ease-in-out;
   /* box-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.2); */
-  padding: 0.75rem
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .my_video{
@@ -98,8 +101,12 @@
   right: 0;
   margin-bottom: 0.5rem;
   z-index: 100;
+  width: 40vh;
+  height: 30vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
-
 .video_show_main{
   top:0;
   overflow-y: auto;
@@ -132,16 +139,83 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 .meter{
-  position: relative;
-  left: 20px;
-  bottom: 25px;
-  width: 80%;
+  width: 100%;
 }
 .big_meter{
-  position: relative;
-  left: 200px;
-  bottom: 25px;
-  width: 64%;
+  width: 100%;
+}
+.hideMyMedia{
+  width: 6vh;
+  background-color: gray;
+  border-radius: 10px 0 0 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  cursor: pointer;
+  height: 100%;
+}
+.myModal{
+  max-width: 25%!important;
+  margin-left: 75%!important;
+}
+.chatAvatarArea{
+  display: flex;
+  flex-direction: row;
+}
+.otherMessage{
+  width: 80%;
+  margin: 5px;
+}
+.chatMessage{
+  background-color: #fff;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  white-space: pre-wrap;
+}
+.myChatMessage{
+  background-color: aliceblue;
+  padding: 5px 15px 5px 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  white-space: pre-wrap;
+}
+.messageText{
+  margin-bottom: 0;
+  overflow-wrap: break-word;
+  width: 100%;
+}
+.myMessage{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+.sendButton{
+  background-color: #0d6efd;
+  color: #fff;
+  width: 15% ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.messageInputArea{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.inputArea{
+  width: 75%;
+  border-radius: 5px;
+  padding: 5px;
+}
+.myModalBD{
+  background-color: rgba(0, 0, 0, 0)!important;
 }
 @media (max-width: 900px){
   .big_meter{
@@ -149,4 +223,33 @@
     bottom: 220px;
     width: 80%;
   }
+  .myModal{
+    max-width: 100%!important;
+    margin-left: 0%!important;
+    height: 40%!important;
+    margin-top: 60vh!important;
+  }
+  .myModalBD{
+    background-color: rgba(0, 0, 0, 0)!important;
+  }
+  .ModalHeader{
+    height: 5vh!important;
+  }
+  .myModalCT{
+    height: 100%;
+  }
+  .Modalfooter{
+    height: 8vh!important;
+    padding: 0!important;
+  }
+  .sendButton{
+    width: 10%;
+  }
+  /* .hideMyMedia{
+    width: 10vh;
+  } */
+  /* .my_video_grid{
+    width: 10vh;
+    height: 10vh;
+  } */
 }

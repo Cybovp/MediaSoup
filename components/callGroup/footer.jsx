@@ -41,6 +41,8 @@ export default function footer({ ...props }) {
 	const [windowWidth, setWindowWidth] = useState(0);
 	const [showModalFunctionArea1, setShowModalFunctionArea1] = useState(false);
 	const [showModalFunctionArea2, setShowModalFunctionArea2] = useState(false);
+	
+
 	useEffect(()=>{
 		if (typeof window !== 'undefined') {
 			setWindowWidth(window.innerWidth);
@@ -206,7 +208,7 @@ export default function footer({ ...props }) {
 					</div>
 				) : (
 					<>
-						<Modal style={{top: '70%'}} show={showModalFunctionArea1} onHide={handleCloseModalFunctionArea1}>
+						<Modal backdropClassName={styles.myModalBD} style={{top: '70%'}} show={showModalFunctionArea1} onHide={handleCloseModalFunctionArea1}>
 							<Modal.Body style={{backgroundColor: '#000'}}>
 								<div className={`d-flex ${styles.firstArea}`}>
 									<Button
@@ -393,6 +395,12 @@ export default function footer({ ...props }) {
 				</div>
 				{(windowWidth && windowWidth > 900) ? (
 					<div className={`${styles.setting_change} d-flex `}>
+						<Button 
+							className={`${styles.chat} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
+							onClick={()=>props.setOpenChat(true)}>
+							<i
+								className={`fa-regular fa-comment color_light ${styles.setting_icon}`}></i>
+						</Button>
 						<Button
 							className={`${styles.grid_icon_cover} fs-4 d-flex align-items-center justify-content-center bg-transparent border-0`}
 							onClick={changeDisplay}
@@ -499,12 +507,19 @@ export default function footer({ ...props }) {
 							<i
 								className={`fa-solid fa-gear color_light ${styles.setting_icon}`}></i>
 						</Button>
+
 					</div>
 				): (
 					<>
-						<Modal style={{top: '70%'}} show={showModalFunctionArea2} onHide={handleCloseModalFunctionArea2}>
+						<Modal backdropClassName={styles.myModalBD} style={{top: '70%'}} show={showModalFunctionArea2} onHide={handleCloseModalFunctionArea2}>
 							<Modal.Body style={{backgroundColor: '#000'}}>
 								<div className={`${styles.setting_change} d-flex `}>
+									<Button 
+										className={`${styles.chat} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
+										onClick={()=>props.setOpenChat(true)}>
+										<i
+											className={`fa-regular fa-comment color_light ${styles.setting_icon}`}></i>
+									</Button>
 									<Button
 										className={`${styles.grid_icon_cover} fs-4 d-flex align-items-center justify-content-center bg-transparent border-0`}
 										onClick={changeDisplay}

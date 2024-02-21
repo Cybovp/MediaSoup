@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef, use } from 'react';
 import Layout from '@/components/callGroup/layout';
 import styles from '@/styles/home.module.css';
 import Video from '@/components/video';
@@ -7,6 +7,9 @@ import Audio from '@/components/audio';
 import { postIcon } from '@/ultils/icon';
 import FlyingIcon from '@/components/icon/flyingIcon';
 import { useRouter } from 'next/router';
+import { Modal, Button } from 'react-bootstrap';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+
 
 const io = require('socket.io-client');
 const mediasoupClient = require('mediasoup-client');
@@ -77,6 +80,12 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 	const [allowRaiseHand, setAllowRaiseHand] = useState(true);
 	const [stream, setStream] = useState();
 	const [myVolume, setMyVolume] = useState();
+	const [hideMyMedia, setHideMyMedia] = useState(false);
+	const [openChat, setOpenChat] = useState(false);
+	const [chatInput, setChatInput] = useState();
+	const [allChat, setAllChat] = useState([]);
+	const chatAreaRef = useRef(null);
+	const chatInputRef = useRef(null);
 	useEffect(() => {
 		const initDevices = async () => {
 			if(!socket){ 
@@ -169,6 +178,19 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 						})
 					);
 				});
+				
+				socketInstance.on('receiveChat', ({chat}) => {
+					setAllChat(chat);
+					if(chat && chat.length > 0){
+						if(chat[chat.length-1].socket == socketInstance.id){
+							NotificationManager.success('Đã gửi');
+						}else{
+							NotificationManager.info(chat[chat.length-1].message, chat[chat.length-1].name);
+						}
+					}
+				});
+
+				socketInstance.emit('getChat', ({room}))
 			} catch (e) {
 				console.log(e);
 			}
@@ -322,6 +344,11 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 
 		shareDisplay();
 	}, [isShareScreen]);
+	useEffect(()=>{
+		if(chatAreaRef.current){
+			chatAreaRef.current.scrollTop = chatAreaRef.current.scrollHeight;
+		}
+	},[chatAreaRef])
 	const streamSuccess = (stream) => {
 		setMyMedia(stream);
 		const audioCtx = new AudioContext();
@@ -738,6 +765,28 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 				audio: { deviceId: { exact: audio }},
 				video: false
 			});
+			const audioCtx = new AudioContext();
+			const scriptProcessor = audioCtx.createScriptProcessor(4096, 1, 1); // Adjust buffer size (2^n) as needed
+			const mic = audioCtx.createMediaStreamSource(newstream);
+			mic.connect(scriptProcessor);
+			scriptProcessor.connect(audioCtx.destination);
+			scriptProcessor.onaudioprocess = (event) => {
+				const inputBuffer = event.inputBuffer;
+				const data = inputBuffer.getChannelData(0); // Get first channel data
+			
+				// Calculate root mean square (RMS) to estimate volume
+				let rms = 0;
+				for (let i = 0; i < data.length; i++) {
+				rms += data[i] * data[i];
+				}
+				rms = Math.sqrt(rms / data.length);
+			
+				// Normalize and process the volume value (0-1)
+				const volume = Math.min(rms, 1);
+			
+				// Use the volume value for your application (e.g., display, visualization)
+				setMyVolume(volume);
+			};      
 			myMedia.addTrack(newstream.getAudioTracks()[0])
 			await audioProducer.replaceTrack({track: newstream.getAudioTracks()[0]})
 		}
@@ -771,14 +820,36 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 		stopVideo,
 		stopAudio,
 		room,
+		openChat,
+		setOpenChat
 	};
+	const sendChat = () => {
+		if(chatInput){
+			socket.emit('sendChat',{message: chatInput,room: room});
+			chatInputRef.current.value = null;
+			setChatInput(null);
+		}
+	};
+	const chatKeyPress = (event)=>{
+		if(event.key == 'Enter' && event.ctrlKey){
+			sendChat();
+		}
+	}
+	useEffect(()=>{
+		if(chatAreaRef.current){
+			if(allChat[allChat.length - 1].socket == socket.id){
+				chatAreaRef.current.scrollTop = chatAreaRef.current.scrollHeight;
+			}
+		}
+	},[allChat]);
 	return (
 		<Layout {...props}>
+			<NotificationContainer />
 			{/* <button onClick={() => {
-				console.log(screenShareProducer)
+				NotificationManager.success('Success message', 'Title');
 			}}>test</button> */}
-			<div style={{position: 'absolute', top: '20px', left: '20px', zIndex: '9999'}}>
-				<p style={{color: '#FFF'}}>Room: {room}</p>
+			<div style={{position: 'absolute', top: '20px', left: '20px', zIndex: '9999',pointerEvents:'none'}}>
+				<p style={{color: '#FFF',}}>Room: {room}</p>
 			</div>
 			<div style={{ height: '100%' }} className='position-relative'>
 				<div>
@@ -791,7 +862,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 				</div>
 				<div
 					className={`${styles.my_video}`}
-					style={{ ...(!isGrid ? { width: '25%' } : {}), height: '100%' }}>
+					style={{ ...(!isGrid ? { width: '25%' } : {}), height: '100%', pointerEvents: 'none' }}>
 					{/* view of video other local client show in main layout */}
 					{!isGrid ? (
 						<div
@@ -850,41 +921,62 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 					{/* view my video in grid layout */}
 					{(isGrid || (isShareScreen && myScreenVideo)) && (
 						<div
-							style={{ width: '30vh', height: '20%' }}
 							className={`position-fixed ${styles.my_video_grid}`}>
-							{!isCamera ? (
-								<div
-									className={` ${styles.video_item} rounded bg-dark d-flex justify-content-center align-items-center`}
-									style={{
+							<div onClick={()=>setHideMyMedia(!hideMyMedia)} className={styles.hideMyMedia}>
+								<span className="material-symbols-outlined">{hideMyMedia ? 'arrow_back_ios' : 'arrow_forward_ios'}</span>
+							</div>
+							<div style={{display: hideMyMedia ? 'none' : 'block'}}>
+								{!isCamera ? (
+									<div
+										className={` ${styles.video_item} rounded bg-dark d-flex justify-content-center align-items-center`}
+										style={{
+											width: '100%',
+											height: '100%',
+										}}>
+										<img
+											className={`rounded-circle`}
+											style={{ height: '50%' }}
+											src={avatar ? avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
+										</img>
+									</div>
+								) : (
+									<div style={{
+										backgroundColor: '#000',
+										// padding: '10px',
+										borderRadius: '0 10px 10px 0',
 										width: '100%',
 										height: '100%',
+										display: 'flex',
+										flexDirection: 'column',
+										justifyContent: 'space-evenly',
 									}}>
-									<img
-										className={`rounded-circle`}
-										style={{ height: '50%' }}
-										src={avatar ? avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
-									</img>
-								</div>
-							) : (
-								<>
-									<Video flip srcObject={myMedia}></Video>
-									<meter className={styles.meter}  max={1.0} min={0.0} value={myVolume*5} high={.75} low={.25} optimum={0.5} ></meter>
-								</>
-							)}
-							{
-								raiseHand ? <span className={styles.icon_hand}>{postIcon[74]}</span> : ''
-							}
-							{!isMicro ? (
-								<Image
-									src='./icon/no_micro.svg'
-									alt='no-micro'
-									className={styles.no_micro_icon}
-									width={40}
-									height={40}></Image>
-							) : (
-								// <Audio srcObject={myMedia}></Audio>
-								<></>
-							)}
+										<Video flip srcObject={myMedia}></Video>
+										<div style={{
+											display: 'flex',
+											flexDirection: 'row',
+											alignItems: 'center',
+											color: 'white',
+										}}>
+											<span style={{marginRight: '5px'}} className="material-symbols-outlined">volume_up</span>
+											<meter className={styles.meter}  max={1.0} min={0.0} value={myVolume} high={.75} low={.25} optimum={0.5} ></meter>
+										</div>
+									</div>
+								)}
+								{
+									raiseHand ? <span className={styles.icon_hand}>{postIcon[74]}</span> : ''
+								}
+								{!isMicro ? (
+									<Image
+										src='./icon/no_micro.svg'
+										alt='no-micro'
+										className={styles.no_micro_icon}
+										width={40}
+										height={40}></Image>
+								) : (
+									// <Audio srcObject={myMedia}></Audio>
+									<></>
+								)}
+							</div>
 						</div>
 					)}
 				</div>
@@ -909,12 +1001,30 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 										src={avatar ? avatar : 'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}></img>
 								</div>
 							) : (
-								<>
+								<div style={{
+									backgroundColor: '#000',
+									width: '100%',
+									height: '100%',
+									display: 'flex',
+									flexDirection: 'column',
+									justifyContent: 'space-evenly',
+									// padding: '10px',
+									// borderRadius: '10px',
+								}}>
 									<Video flip={!isShareScreen} srcObject={!isShareScreen ? myMedia : myScreenVideo}></Video>
 									{!isShareScreen && (
-										<meter className={styles.big_meter}  max={1.0} min={0.0} value={myVolume*5} high={.75} low={.25} optimum={0.5} ></meter>
+										<div style={{
+											display: 'flex',
+											flexDirection: 'row',
+											alignItems: 'center',
+											color: 'white',
+											padding: '10px',
+										}}>
+											<span style={{marginRight: '5px'}} className="material-symbols-outlined">volume_up</span>
+											<meter className={styles.meter}  max={1.0} min={0.0} value={myVolume} high={.75} low={.25} optimum={0.5} ></meter>
+										</div>
 									)}
-								</>
+								</div>
 							)
 							}
 							{
@@ -997,6 +1107,71 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 					</div>
 				)}
 			</div>
+			<Modal contentClassName={styles.myModalCT} backdropClassName={styles.myModalBD} dialogClassName={styles.myModal} show={openChat} onHide={()=>setOpenChat(false)}>
+				<Modal.Header className={styles.ModalHeader} closeButton style={{ borderBottom: '1px solid #ccc', }}>
+					<Modal.Title style={{ fontSize: '1rem' }}>
+						<i
+							className={`fa-regular fa-comment color_dark`}></i>
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body ref={chatAreaRef} style={{ padding: '2%',height:'70vh',width:'100%', backgroundColor: '#ebeef5', overflowY:'scroll'}}>
+					{allChat?.map((chat,index) => {
+						if(chat.socket == socket.id){
+							return (
+								<div key={index}>
+									{!(index > 0 && allChat[index].socket == allChat[index-1].socket) && (
+										<div style={{marginLeft:'35px',color:'gray',fontSize:'15px',display: 'flex', justifyContent: 'flex-end'}}>{new Date(chat.time).toLocaleString()}</div>
+									)}
+									<div className={styles.myMessage}>
+										<div style={{maxWidth: '80%'}}>
+											<div className={styles.myChatMessage}>
+												<p className={styles.messageText}>{chat.message}</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							)
+						}else{
+							return(
+								<div key={index} className={styles.otherMessage}>
+									{!(index > 0 && allChat[index].socket == allChat[index-1].socket) && (
+										<div style={{marginLeft:'35px',color:'gray',fontSize:'15px'}}>{chat.name}, {new Date(chat.time).toLocaleString()}</div>
+									)}
+									<div className={styles.chatAvatarArea}>
+										{(index > 0 && allChat[index].socket == allChat[index-1].socket) ? (
+											<div style={{height:'25px', width:'25px', marginRight:'10px' }}></div>
+										) : (
+											<img
+												className={`rounded-circle`}
+												style={{height:'25px', width:'25px', marginRight:'10px' }}
+												src={chat.avatar ? chat.avatar :'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
+											</img>
+										)}
+										<div className={styles.chatMessage}>
+											<p className={styles.messageText}>{chat.message}</p>
+										</div>
+									</div>
+								</div>
+							)
+						}
+					})}
+				</Modal.Body>
+				<Modal.Footer className={styles.Modalfooter}>
+					<div className={styles.messageInputArea}>
+						<textarea 
+							style={{height:'40px'}}
+							ref={chatInputRef}
+							onKeyUp={chatKeyPress} 
+							onChange={(event)=>setChatInput(event.target.value)} 
+							type='text' className={styles.inputArea} 
+							placeholder='Hãy chat gì đó'>
+						</textarea>
+						<div onClick={sendChat} className={styles.sendButton}>
+							<span className="material-symbols-outlined">send</span>
+						</div>
+					</div>
+				</Modal.Footer>
+			</Modal>
 		</Layout>
 	);
 }
