@@ -9,7 +9,9 @@ import FlyingIcon from '@/components/icon/flyingIcon';
 import { useRouter } from 'next/router';
 import { Modal, Button } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
-
+import { MdGroups } from "react-icons/md";
+import { FaMicrophone,FaChromecast,FaMicrophoneSlash } from "react-icons/fa";
+import { FiCamera,FiCameraOff  } from "react-icons/fi";
 
 const io = require('socket.io-client');
 const mediasoupClient = require('mediasoup-client');
@@ -84,6 +86,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 	const [openChat, setOpenChat] = useState(false);
 	const [chatInput, setChatInput] = useState();
 	const [allChat, setAllChat] = useState([]);
+	const [openMembers, setOpenMembers] = useState(false);
 	const chatAreaRef = useRef(null);
 	const chatInputRef = useRef(null);
 	useEffect(() => {
@@ -821,7 +824,9 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 		stopAudio,
 		room,
 		openChat,
-		setOpenChat
+		setOpenChat,
+		openMembers,
+		setOpenMembers,
 	};
 	const sendChat = () => {
 		if(chatInput){
@@ -1114,7 +1119,7 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 							className={`fa-regular fa-comment color_dark`}></i>
 					</Modal.Title>
 				</Modal.Header>
-				<Modal.Body ref={chatAreaRef} style={{ padding: '2%',height:'70vh',width:'100%', backgroundColor: '#ebeef5', overflowY:'scroll'}}>
+				<Modal.Body className={styles.ModalBody} ref={chatAreaRef} style={{ padding: '2%',height:'70vh',width:'100%', backgroundColor: '#ebeef5', overflowY:'scroll'}}>
 					{allChat?.map((chat,index) => {
 						if(chat.socket == socket.id){
 							return (
@@ -1170,6 +1175,65 @@ export default function meetingRoom({ room,name,video,audio,avatar }) {
 							<span className="material-symbols-outlined">send</span>
 						</div>
 					</div>
+				</Modal.Footer>
+			</Modal>
+			<Modal contentClassName={styles.myModalCT} backdropClassName={styles.myModalBD} dialogClassName={styles.myModal} show={openMembers} onHide={()=>setOpenMembers(false)}>
+				<Modal.Header className={styles.ModalHeader} closeButton style={{ borderBottom: '1px solid #ccc',backgroundColor: 'gray' }}>
+					<Modal.Title style={{ fontSize: '1rem' }}>
+						<MdGroups/>
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body className={styles.ModalBody2} style={{ padding: '2%',height:'70vh',width:'100%', backgroundColor: '#000', overflowY:'scroll'}}>
+					<div className={styles.member}>
+						<div className={styles.memberAvatar}>
+							<img
+								className={`rounded-circle`}
+								style={{height:'35px', width:'35px', marginRight:'10px' }}
+								src={avatar ? avatar :'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
+							</img>
+						</div>
+						<div className={styles.memberName}>
+							<div className={styles.memberNameText}>{name}</div>
+							<div className={styles.memberDevice}>
+								<div style={{width: '10%'}}>
+									{isCamera ? <FiCamera/> : <FiCameraOff/>}
+								</div>
+								<div style={{width: '10%'}}>
+									{isMicro ? <FaMicrophone/> : <FaMicrophoneSlash/>}
+								</div>
+								<div style={{width: '10%'}}>
+									{/* <FaChromecast/> */}
+								</div>
+							</div>
+						</div>
+					</div>
+					{arrayMedia.map(item => item.kind === 'video' && (
+						<div className={styles.member}>
+							<div className={styles.memberAvatar}>
+								<img
+									className={`rounded-circle`}
+									style={{height:'35px', width:'35px', marginRight:'10px' }}
+									src={item.avatar ? item.avatar :'https://mandalay.com.vn/wp-content/uploads/2023/06/co-4-la-may-man-avatar-dep-18.jpg'}>
+								</img>
+							</div>
+							<div className={styles.memberName}>
+								<div className={styles.memberNameText}>{item.userName}</div>
+								<div className={styles.memberDevice}>
+									<div style={{width: '10%'}}>
+										{item.activeVideo ? <FiCamera/> : <FiCameraOff/>}
+									</div>
+									<div style={{width: '10%'}}>
+										{item.activeAudio ? <FaMicrophone/> : <FaMicrophoneSlash/>}
+									</div>
+									<div style={{width: '10%'}}>
+										{item.audioScreen && item.videoScreen && <FaChromecast/>}
+									</div>
+								</div>
+							</div>
+						</div>
+					))}
+				</Modal.Body>
+				<Modal.Footer className={styles.Modalfooter} style={{backgroundColor: 'gray'}}>
 				</Modal.Footer>
 			</Modal>
 		</Layout>

@@ -4,6 +4,7 @@ import { Modal, Button } from 'react-bootstrap';
 import Image from 'next/image';
 import Video from '@/components/video';
 import { postIcon } from '@/ultils/icon';
+import { MdGroups } from "react-icons/md";
 
 export default function footer({ ...props }) {
 	const [isGrid, setIsGrid] = [props.isGrid, props.setIsGrid];
@@ -397,6 +398,11 @@ export default function footer({ ...props }) {
 					<div className={`${styles.setting_change} d-flex `}>
 						<Button 
 							className={`${styles.chat} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
+							onClick={()=>props.setOpenMembers(true)}>
+							<MdGroups/>
+						</Button>
+						<Button 
+							className={`${styles.chat} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
 							onClick={()=>props.setOpenChat(true)}>
 							<i
 								className={`fa-regular fa-comment color_light ${styles.setting_icon}`}></i>
@@ -514,6 +520,11 @@ export default function footer({ ...props }) {
 						<Modal backdropClassName={styles.myModalBD} style={{top: '70%'}} show={showModalFunctionArea2} onHide={handleCloseModalFunctionArea2}>
 							<Modal.Body style={{backgroundColor: '#000'}}>
 								<div className={`${styles.setting_change} d-flex `}>
+									<Button 
+										className={`${styles.chat} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
+										onClick={()=>props.setOpenMembers(true)}>
+										<MdGroups/>
+									</Button>
 									<Button 
 										className={`${styles.chat} fs-4 rounded-circle d-flex align-items-center justify-content-center`}
 										onClick={()=>props.setOpenChat(true)}>

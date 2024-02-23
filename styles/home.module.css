@@ -72,7 +72,8 @@
   grid-gap: 10px; /* Khoảng cách giữa các ô */
   max-height: 80%;
   /* box-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.2); */
-  padding: 0.75rem
+  padding: 0.75rem;
+  max-height: 50vh;
 }
 
 .video_item{
@@ -216,6 +217,65 @@
 }
 .myModalBD{
   background-color: rgba(0, 0, 0, 0)!important;
+}
+.ModalBody::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: #ebeef5;
+}
+.ModalBody::-webkit-scrollbar-thumb{
+  background-color: #0d6efd;
+  border-radius: 5px;
+}
+.ModalBody::-webkit-scrollbar-thumb:hover {
+  background-color: #73a6f1;
+}
+.ModalBody2::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+  background: #000;
+}
+.ModalBody2::-webkit-scrollbar-thumb{
+  background-color: gray;
+  border-radius: 5px;
+}
+.ModalBody2::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(192, 191, 191);
+}
+.member{
+  max-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+.memberAvatar{
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.memberName{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: space-between;
+}
+.memberNameText{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 60%;
+  white-space: nowrap; 
+}
+.memberDevice{
+  width: 40%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 @media (max-width: 900px){
   .big_meter{
