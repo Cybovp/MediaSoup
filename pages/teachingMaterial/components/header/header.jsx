@@ -21,10 +21,10 @@ export default function Header() {
                         Video
                     </div>
                     <div className={styles.headerNavigation}>
-                        <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Trò chơi học tập</Link>
+                        <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial/teachingGame">Trò chơi học tập</Link>
                     </div>
                     <div className={styles.headerNavigation}>
-                        <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Tài liệu giảng dạy</Link>
+                        <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial/teachingDocument">Tài liệu giảng dạy</Link>
                     </div>	
 				</Modal.Body>
             </Modal>
@@ -44,10 +44,10 @@ export default function Header() {
                     Video
                 </div>
                 <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Trò chơi học tập</Link>
+                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial/teachingGame">Trò chơi học tập</Link>
                 </div>
                 <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Tài liệu giảng dạy</Link>
+                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial/teachingDocument">Tài liệu giảng dạy</Link>
                 </div>	
             </div>
             <div className={styles.headerMobile}>
