@@ -11,6 +11,9 @@ export default function TeachingDocument() {
     return (
         <div className={styles.body}>
             <Header/>
+            <div className={styles.mainContent}>
+                
+            </div>
             <Footer/>
         </div>
     )
