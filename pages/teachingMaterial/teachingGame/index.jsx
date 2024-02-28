@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Pagination from '@/components/home/pagination/pagination';
 import { Modal, Button } from 'react-bootstrap';
+import Header from '../components/header/header';
+import Footer from '../components/footer/footer';
 
 const ListGameTypes = [
     {
@@ -324,50 +326,7 @@ export default function TeachingGame() {
     }
     return (
         <div className={styles.body}>
-            <Modal contentClassName={styles.myModalCT} backdropClassName={styles.myModalBD} show={showNavigation} onHide={()=>setShowNavigation(false)}>
-                <Modal.Body className={styles.modalBody}>
-                    <div className={styles.headerNavigation}>
-                        <Link className={styles.link} href="http://localhost:3000/teachingMaterial">Trang chủ</Link>
-                    </div>
-                    <div className={styles.headerNavigation}>
-                        Hình ảnh trực quan
-                    </div>
-                    <div className={styles.headerNavigation}>
-                        Video
-                    </div>
-                    <div className={styles.headerNavigation}>
-                        <Link className={styles.link} href="http://localhost:3000/teachingMaterial/teachingGame">Trò chơi học tập</Link>
-                    </div>
-                    <div className={styles.headerNavigation}>
-                        <Link className={styles.link} href="http://localhost:3000/teachingMaterial/teachingDocument">Tài liệu giảng dạy</Link>
-                    </div>	
-				</Modal.Body>
-            </Modal>
-            <div className={styles.headerContainer}>
-                <div className={styles.logo}>
-                    <img src='https://lh3.googleusercontent.com/sZCtuI5NKeq_V0sn3AxE4u8ZPabmvIpeld3HH7dYT5EWUL0OuutlqK15gZ8ml6hyKLfuC-pPDsLINltHJi5V8FlDBqUgLpf3fQ=w57-rw'>
-
-                    </img>
-                </div>
-                <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="http://localhost:3000/teachingMaterial">Trang chủ</Link>
-                </div>
-                <div className={styles.headerNavigation}>
-                    Hình ảnh trực quan
-                </div>
-                <div className={styles.headerNavigation}>
-                    Video
-                </div>
-                <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="http://localhost:3000/teachingMaterial/teachingGame">Trò chơi học tập</Link>
-                </div>
-                <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="http://localhost:3000/teachingMaterial/teachingDocument">Tài liệu giảng dạy</Link>
-                </div>
-            </div>
-            <div className={styles.headerMobile}>
-                <Image onClick={()=>setShowNavigation(true)} style={{objectFit:'cover', marginLeft: '20px'}} width={20} height={40} src={'/gameImg/Mega menu.png'} />
-            </div>
+            <Header/>
             <div className={styles.mainContent}>
                 <div className={styles.filterArea}>
                     <div className={styles.gameKind}>
@@ -497,6 +456,7 @@ export default function TeachingGame() {
                     </button>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }
