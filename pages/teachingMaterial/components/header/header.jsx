@@ -35,7 +35,7 @@ export default function Header() {
                     </img>
                 </div>
                 <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="http://localhost:3000/teachingMaterial">Trang chủ</Link>
+                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Trang chủ</Link>
                 </div>
                 <div className={styles.headerNavigation}>
                     Hình ảnh trực quan
@@ -44,11 +44,11 @@ export default function Header() {
                     Video
                 </div>
                 <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="http://localhost:3000/teachingMaterial/teachingGame">Trò chơi học tập</Link>
+                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Trò chơi học tập</Link>
                 </div>
                 <div className={styles.headerNavigation}>
-                    <Link className={styles.link} href="http://localhost:3000/teachingMaterial/teachingDocument">Tài liệu giảng dạy</Link>
-                </div>
+                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Tài liệu giảng dạy</Link>
+                </div>	
             </div>
             <div className={styles.headerMobile}>
                 <Image onClick={()=>setShowNavigation(true)} style={{objectFit:'cover', marginLeft: '20px'}} width={20} height={40} src={'/gameImg/Mega menu.png'} />
