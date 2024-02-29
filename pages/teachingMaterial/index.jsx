@@ -13,19 +13,19 @@ export default function Home (){
     const [showNavigation, setShowNavigation] = useState(false);
     const slides = [
         {
-          imageUrl: 'https://bestfriends.org/sites/default/files/styles/hero_mobile/public/hero-dash/Asana3808_Dashboard_Standard.jpg?h=ebad9ecf&itok=cWevo33k',
-          altText: 'Slide 1 description',
-          title: 'Slide 1 Title',
-          description: 'Slide 1 content',
-        },
-        {
-            imageUrl: 'https://bestfriends.org/sites/default/files/styles/hero_mobile/public/hero-dash/Asana3808_Dashboard_Standard.jpg?h=ebad9ecf&itok=cWevo33k',
+            imageUrl: '/gameImg/HomeImg/slide1.png',
             altText: 'Slide 1 description',
             title: 'Slide 1 Title',
             description: 'Slide 1 content',
         },
         {
-            imageUrl: 'https://bestfriends.org/sites/default/files/styles/hero_mobile/public/hero-dash/Asana3808_Dashboard_Standard.jpg?h=ebad9ecf&itok=cWevo33k',
+            imageUrl: '/gameImg/HomeImg/slide3.jpg',
+            altText: 'Slide 1 description',
+            title: 'Slide 1 Title',
+            description: 'Slide 1 content',
+        },
+        {
+            imageUrl: '/gameImg/HomeImg/slide2.png',
             altText: 'Slide 1 description',
             title: 'Slide 1 Title',
             description: 'Slide 1 content',
@@ -64,53 +64,55 @@ export default function Home (){
                     <p>Trang web cung cấp một kho tài nguyên dữ liệu phong phú và đa dạng giúp giáo viên tiểu học xây dựng hoạt động học tập sáng tạo và hấp dẫn cho học sinh đầu tiểu học. Trang web bao gồm rất nhiều hình ảnh, video trực quan sinh động minh họa cho nội dung bài học; các trò chơi học tập giúp tăng hứng thú học tập cho học sinh tiểu học. Ngoài ra, trang web còn cung cấp ý tưởng thiết kế hoạt động và các tài liệu giảng dạy giúp giáo viên tận dụng tối đa sự sáng tạo của mình.</p>
                 </div>
                 <div className={styles.slideShow}>
-                    <Carousel
-                        showArrows={true} // Enable navigation arrows
-                        showThumbs={false} // Disable thumbnails (optional)
-                        infiniteLoop={true} // Enable continuous looping
-                        autoPlay={true} // Enable automatic play
-                        interval={5000} // Adjust interval as needed (in milliseconds)
-                        onSelectSlide={handleSelectSlide}
-                        currentIndex={currentIndex}
-                        >
-                        {slides.map((slide, index) => (
-                            <div key={index} className="slide">
-                                <img style={{width: '80%', height: '400px', objectFit: 'cover'}} src={slide.imageUrl} alt={slide.altText} />
-                            </div>
-                        ))}
-                    </Carousel>
+                    <div style={{width:'90%',height: '80%'}}>
+                        <Carousel
+                            showArrows={true} // Enable navigation arrows
+                            showThumbs={false} // Disable thumbnails (optional)
+                            infiniteLoop={true} // Enable continuous looping
+                            autoPlay={true} // Enable automatic play
+                            interval={5000} // Adjust interval as needed (in milliseconds)
+                            onSelectSlide={handleSelectSlide}
+                            currentIndex={currentIndex}
+                            >
+                            {slides.map((slide, index) => (
+                                <div key={index} className="slide">
+                                    <img style={{width: '80%', height: '100%', objectFit: 'cover'}} src={slide.imageUrl} alt={slide.altText} />
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
                 </div>
                 <div className={styles.imagesArea}>
-                    <div className={styles.ImageColumn}>
-                        <div className={styles.ImageSmall}>
-                            <img className={styles.image} src='https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'></img>
+                    <div className={styles.imageSection}> 
+                        <div className={styles.ImageColumn}>
+                            <div className={styles.ImageBig}>
+                                <img className={styles.image} src='/gameImg/HomeImg/songHoAo.png'></img>
+                            </div>
+                            <div className={styles.ImageBig}>
+                                <img className={styles.image} src='/gameImg/HomeImg/giacQuan.png'></img>
+                            </div>
                         </div>
-                        <div className={styles.ImageBig}>
-                            <img className={styles.image} src='https://bestfriends.org/sites/default/files/styles/hero_mobile/public/hero-dash/Asana3808_Dashboard_Standard.jpg?h=ebad9ecf&itok=cWevo33k'></img>
-                        </div>
-                    </div>
-                    <div className={styles.ImageColumn}>
-                        <div className={styles.ImageBig}>
-                            <img className={styles.image} src='https://bestfriends.org/sites/default/files/styles/hero_mobile/public/hero-dash/Asana3808_Dashboard_Standard.jpg?h=ebad9ecf&itok=cWevo33k'></img>
-                        </div>
-                        <div className={styles.ImageSmall}>
-                            <img className={styles.image} src='https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'></img>
-                        </div>
-                    </div>
-                    <div className={styles.ImageColumn}>
-                        <div className={styles.ImageSmall}>
-                            <img className={styles.image} src='https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'></img>
-                        </div>
-                        <div className={styles.ImageBig}>
-                            <img className={styles.image} src='https://bestfriends.org/sites/default/files/styles/hero_mobile/public/hero-dash/Asana3808_Dashboard_Standard.jpg?h=ebad9ecf&itok=cWevo33k'></img>
+                        <div className={styles.ImageColumn}>
+                            <div className={styles.ImageBig}>
+                                <img className={styles.image} src='/gameImg/HomeImg/canhHoa.png'></img>
+                            </div>
+                            <div className={styles.ImageBig}>
+                                <img className={styles.image} src='/gameImg/HomeImg/rung.png'></img>
+                            </div>
                         </div>
                     </div>
-                    <div className={styles.ImageColumn}>
-                        <div className={styles.ImageBig}>
-                            <img className={styles.image} src='https://bestfriends.org/sites/default/files/styles/hero_mobile/public/hero-dash/Asana3808_Dashboard_Standard.jpg?h=ebad9ecf&itok=cWevo33k'></img>
+                    <div className={styles.imageSection2}>
+                        <div className={styles.ImageSmall}>
+                            <img className={styles.image} src='/gameImg/HomeImg/0001.jpg'></img>
                         </div>
                         <div className={styles.ImageSmall}>
-                            <img className={styles.image} src='https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'></img>
+                            <img className={styles.image} src='/gameImg/HomeImg/0002.jpg'></img>
+                        </div>
+                        <div className={styles.ImageSmall}>
+                            <img className={styles.image} src='/gameImg/HomeImg/0003.jpg'></img>
+                        </div>
+                        <div className={styles.ImageSmall}>
+                            <img className={styles.image} src='/gameImg/HomeImg/0004.jpg'></img>
                         </div>
                     </div>
                 </div>
