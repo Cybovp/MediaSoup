@@ -54,7 +54,7 @@ export default function Footer() {
                         fontSize: '30px',
                         padding: '20px',
                         fontWeight: '600'
-                    }}>Please like and subscribe to my Chanel=)))))</p>
+                    }}>Đăng kí để nhận thông tin về tài liệu giảng dạy mới</p>
                     <div className={styles.inputArea}>
                         <label className={styles.footerText} style={{
                             color: 'white',
