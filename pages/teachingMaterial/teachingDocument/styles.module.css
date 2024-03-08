@@ -125,6 +125,149 @@
     width: 100%;
     height: 100%;
 }
+.filterArea{
+    display: absolute;
+    width: 30%;
+    height: 100%;
+    /* box-shadow: 0px 2px 20px 0px #1A11141A; */
+    padding-top: 50px;
+    /* padding-bottom: 100px; */
+    border-bottom-right-radius: 20px;
+}
+.gameKind{
+    margin-left: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 10px 0px #000;
+    border-radius: 20px;
+}
+.gameKind:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+    color: wheat;
+}
+.subjectFilter{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20px;
+    width: 90%;
+    gap: 10px;
+}
+.subjectKind{
+    width: 48%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 10px 0px #000;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.subjectKind:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+    color: wheat;
+}
+.contentArea{
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    background-color: #fff;
+}
+.game{
+    width: 360px;
+    border-radius: 20px;
+}
+.gameImage{
+    border-radius: 20px;
+    background-size: cover;
+    cursor: pointer;
+    background-color: aliceblue;
+    box-shadow: 0px 2px 10px 0px #000;
+}
+.gameImage:hover{
+    opacity: 50%;
+}
+.gameDes{
+    width: 100%;
+    height: 200px;
+    background-color: aliceblue;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+.docDes{
+    width: 60%;
+    height: 100%;
+    background-color: aliceblue;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 20px;
+    flex-direction: column;
+}
+.gameTittle{
+    width: 80%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 20px;
+}
+.gameDescription{
+    width: 80%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 200;
+    font-style: italic;
+}
+.gameDownLoad{
+    width: 120px;
+    height: 40px;
+    background-color: greenyellow;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+}
+.downloadLink{
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 50px;
+}
 .headerMobile{
     display: none;
     width: 100%;
@@ -151,6 +294,79 @@
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
 }
+.searcGameInput{
+    width: 50%;
+    border: none;
+}
+.searchGameButton{
+    width: 20%;
+    height: 80%;
+    background-color: orange;
+    margin-left: 10%;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.gradeFilter{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.grade{
+    width: 18%;
+    height: 100%;
+    font-weight: 800;
+    font-size: 25px;
+    color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.grade:hover{
+    opacity: 0.5;
+}
+.borderBottom {
+    border-bottom: orange solid 5px;
+}
+.contentItems{
+    width: 100%;
+}
+.document{
+    width: 100%;
+    border-radius: 20px;
+    background-size: cover;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0px 2px 10px 0px #000;
+    padding: 10px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+.documentTitle{
+    font-weight: 600;
+    font-size: 20px;
+}
+.docSection{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.docImg{
+    width: 38%;
+    height: 100%;
+}
+.docImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
 @media (max-width: 900px){
     .headerMobile{
         display: block;
@@ -172,5 +388,36 @@
         width: 100%;
         height: 100%;
         margin-bottom: 20px;
+    }
+    .mainContent{
+        flex-direction: column;
+        margin-top: 50px;
+    }
+    .filterArea{
+        width: 100%;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .contentArea{
+        width: 100%;
+        padding-top: 0;
+    }
+    .gameKind{
+        padding-left: 0;
+        align-items: center;
+        justify-content: center;
+    }
+    .documentTitle{
+        font-size: 15px;
+    }
+    .doctext{
+        font-size: 12px;
+    }
+    .grade{
+        font-size: 15px;
+    }
+    .subjectKind{
+        width: 30%;
+        font-size: 11px;
     }
 }
