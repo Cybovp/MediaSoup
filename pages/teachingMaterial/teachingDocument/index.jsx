@@ -25,7 +25,7 @@ const listSubject = [
     {
         id: 3,
         type: 'subject',
-        name: 'Khoa học'
+        name: 'Tự nhiên và Xã hội'
     },
     {
         id: 4,
@@ -58,10 +58,15 @@ const listSubject = [
         name: 'Tin học'
     },
     {
+        id: 11,
+        type: 'subject',
+        name: 'Hoạt động trải nghiệm'
+    },
+    {
         id: 10,
         type: 'subject',
         name: 'Tất cả'
-    }
+    },
 ]
 const listGrade = [
     {
@@ -117,20 +122,20 @@ const documents = [
     },
     {
         id: 3,
-        name: 'Tài liệu giảng dạy môn Khoa học lớp 1',
+        name: 'Tài liệu giảng dạy môn Tự nhiên và Xã hội lớp 1',
         des: 'This is a ducument',
         subject: 3,
         grade: 0,
         img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
     },
-    {
-        id: 4,
-        name: 'Tài liệu giảng dạy môn Lịch sử Địa lý lớp 1',
-        des: 'This is a ducument',
-        subject: 4,
-        grade: 0,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
-    },
+    // {
+    //     id: 4,
+    //     name: 'Tài liệu giảng dạy môn Lịch sử Địa lý lớp 1',
+    //     des: 'This is a ducument',
+    //     subject: 4,
+    //     grade: 0,
+    //     img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+    // },
     {
         id: 5,
         name: 'Tài liệu giảng dạy môn Âm nhạc lớp 1',
@@ -165,7 +170,7 @@ const documents = [
     },
     {
         id: 9,
-        name: 'Tài liệu giảng dạy môn Tin h lớp 1',
+        name: 'Tài liệu giảng dạy môn Tin học lớp 1',
         des: 'This is a ducument',
         subject: 9,
         grade: 0,
@@ -197,7 +202,7 @@ const documents = [
     },
     {
         id: 13,
-        name: 'Tài liệu giảng dạy môn Khoa học lớp 2',
+        name: 'Tài liệu giảng dạy môn Tự nhiên và Xã hội lớp 2',
         des: 'This is a ducument',
         subject: 3,
         grade: 1,
@@ -245,7 +250,7 @@ const documents = [
     },
     {
         id: 19,
-        name: 'Tài liệu giảng dạy môn Tin h lớp 2',
+        name: 'Tài liệu giảng dạy môn Tin học lớp 2',
         des: 'This is a ducument',
         subject: 9,
         grade: 1,
@@ -277,7 +282,7 @@ const documents = [
     },
     {
         id: 23,
-        name: 'Tài liệu giảng dạy môn Khoa học lớp 3',
+        name: 'Tài liệu giảng dạy môn Tự nhiên và Xã hội lớp 3',
         des: 'This is a ducument',
         subject: 3,
         grade: 2,
@@ -325,7 +330,7 @@ const documents = [
     },
     {
         id: 29,
-        name: 'Tài liệu giảng dạy môn Tin h lớp 3',
+        name: 'Tài liệu giảng dạy môn Tin học lớp 3',
         des: 'This is a ducument',
         subject: 9,
         grade: 2,
@@ -357,7 +362,7 @@ const documents = [
     },
     {
         id: 33,
-        name: 'Tài liệu giảng dạy môn Khoa học lớp 4',
+        name: 'Tài liệu giảng dạy môn Tự nhiên và Xã hội lớp 4',
         des: 'This is a ducument',
         subject: 3,
         grade: 3,
@@ -405,7 +410,7 @@ const documents = [
     },
     {
         id: 39,
-        name: 'Tài liệu giảng dạy môn Tin h lớp 4',
+        name: 'Tài liệu giảng dạy môn Tin học lớp 4',
         des: 'This is a ducument',
         subject: 9,
         grade: 3,
@@ -437,7 +442,7 @@ const documents = [
     },
     {
         id: 43,
-        name: 'Tài liệu giảng dạy môn Khoa học lớp 5',
+        name: 'Tài liệu giảng dạy môn Tự nhiên và Xã hội lớp 5',
         des: 'This is a ducument',
         subject: 3,
         grade: 4,
@@ -485,9 +490,49 @@ const documents = [
     },
     {
         id: 49,
-        name: 'Tài liệu giảng dạy môn Tin h lớp 5',
+        name: 'Tài liệu giảng dạy môn Tin học lớp 5',
         des: 'This is a ducument',
         subject: 9,
+        grade: 4,
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+    },
+    {
+        id: 50,
+        name: 'Tài liệu giảng dạy môn Hoạt động trải nghiệm lớp 1',
+        des: 'This is a ducument',
+        subject: 11,
+        grade: 0,
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+    },
+    {
+        id: 51,
+        name: 'Tài liệu giảng dạy môn Hoạt động trải nghiệm lớp 2',
+        des: 'This is a ducument',
+        subject: 11,
+        grade: 1,
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+    },
+    {
+        id: 52,
+        name: 'Tài liệu giảng dạy môn Hoạt động trải nghiệm lớp 3',
+        des: 'This is a ducument',
+        subject: 11,
+        grade: 2,
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+    },
+    {
+        id: 53,
+        name: 'Tài liệu giảng dạy môn Hoạt động trải nghiệm lớp 4',
+        des: 'This is a ducument',
+        subject: 11,
+        grade: 3,
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+    },
+    {
+        id: 54,
+        name: 'Tài liệu giảng dạy môn Hoạt động trải nghiệm lớp 5',
+        des: 'This is a ducument',
+        subject: 11,
         grade: 4,
         img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
     },
@@ -499,7 +544,7 @@ export default function TeachingDocument() {
     const [grade, setGrade] = useState(0);
     const [activeItem, setActiveItem] = useState(null);
     const [filterData, setFilterData] = useState({});
-    const [filterDocuments, setFilterDocuments] = useState(documents)
+    const [filterDocuments, setFilterDocuments] = useState(documents);
     const search = () => {
         if(filterData.search){
             const data = documents.filter(d => d.name.includes(filterData.search))
@@ -513,6 +558,9 @@ export default function TeachingDocument() {
             setFilterDocuments(documents);
         }
     },[filterData.search])
+    useEffect(()=>{
+
+    })
     return (
         <div className={styles.body}>
             <Header/>
@@ -525,7 +573,11 @@ export default function TeachingDocument() {
                         </div>
                     </div>
                     <div className={styles.subjectFilter}>
-                        {listSubject.map(k => (
+                        {grade != 0 ? listSubject.map(k => (
+                            <div key={k.id} onClick={()=>setSubject(k.id)} className={styles.subjectKind}>
+                                {k.name}
+                            </div>
+                        )): listSubject.filter(k => k.id != 4).map(k => (
                             <div key={k.id} onClick={()=>setSubject(k.id)} className={styles.subjectKind}>
                                 {k.name}
                             </div>
