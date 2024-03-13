@@ -27,7 +27,7 @@ export default function Footer() {
                             Địa chỉ
                         </div> 
                         <div className={styles.footerText}>
-                            Mèo mèo mèo mèo mèo
+                            {/* Mèo mèo mèo mèo mèo */}
                         </div>
                     </div>
                     <div className={styles.footerText} style={{
