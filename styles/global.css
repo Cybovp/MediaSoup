@@ -63,7 +63,7 @@ meter::-moz-meter-bar {
   background-color: transparent;
   border: none;
 }
-/* .carousel.carousel-slider .control-arrow{
-  background: rgba(0, 0, 0, 0.2) !important;
-} */
+.carousel .control-dots .dot{
+  background: rgba(0, 0, 0, 0.5) !important;
+}
 
