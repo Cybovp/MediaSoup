@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
+import { Carousel } from 'react-responsive-carousel';
 
 const listSubject = [
     {
@@ -102,7 +103,17 @@ const documents = [
         des: 'This is a ducument',
         subject: 0,
         grade: 0,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade1/caTimDan.png',
+                link:'https://drive.google.com/file/d/14ptE4looMgGy1dtICJd_BQUAoUoGxZ3h/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/bangChuCai.png',
+                link:'https://drive.google.com/file/d/1bsJ83ywKNSOpSQuTd4Njq9ThGy3cgSWi/view?usp=sharing'
+            }
+        ]
     },
     {
         id: 1,
@@ -110,7 +121,37 @@ const documents = [
         des: 'This is a ducument',
         subject: 1,
         grade: 0,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade1/baiCaSo.png',
+                link:'https://drive.google.com/file/d/1ZJfUpcVjKavzbCT0iqk2g_d2JTDlExv_/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/xemDongHo.png',
+                link:'https://drive.google.com/file/d/1_q0Od3jaNf4z91P5inY6gtrY5XhdCB5R/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/so.png',
+                link:'https://drive.google.com/file/d/1XA7jG6WsnWbWQ5R7vxV9GMMK3izQngwo/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/dau.png',
+                link:'https://drive.google.com/file/d/1R_cR8VvwOtlsbOdX_PXGykYF4HPlpFVn/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/phieuBaiTapToan.png',
+                link:'https://drive.google.com/file/d/1ggdcneYC9t1o1Nv1ripytI9hfdthYj3P/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/hinhHocPhang.png',
+                link:'https://docs.google.com/presentation/d/17ntmVT46OQPAEBTXIU9gpdbWP6q8Fclz/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true'
+            },
+            {
+                img:'/documentImg/grade1/ktraCK1.png',
+                link:'https://drive.google.com/file/d/14MbhF11mny5yLIOVo9lFa25zClfmTc71/view?usp=sharing'
+            },
+        ]
     },
     {
         id: 2,
@@ -118,7 +159,17 @@ const documents = [
         des: 'This is a ducument',
         subject: 2,
         grade: 0,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade1/daoDuc1.png',
+                link:'https://drive.google.com/file/d/1d8GgpZKqnlxAYk32wfugqZbuoMvgawZV/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/daoDuc2.png',
+                link:'https://drive.google.com/file/d/1-3UtSJ2AIcUix8NCd9i80wCZZTm4d2PU/view?usp=sharing'
+            }
+        ]
     },
     {
         id: 3,
@@ -126,7 +177,25 @@ const documents = [
         des: 'This is a ducument',
         subject: 3,
         grade: 0,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade1/phieuHocTapTNXH.png',
+                link:'https://drive.google.com/file/d/1c7s5lv2f3nQiJsO-YTh4hrPY1tf7tUpY/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/phieuBaiTapTNXH.png',
+                link:'https://drive.google.com/file/d/1K5BFvSZt-8AodP-28eJ6W-jBzP_nJxCq/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/doChoiDanGian.png',
+                link:'https://drive.google.com/file/d/1aqkE9thkU2fyX2kVNem_sy2S-kjTWhle/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade1/boPhanCay.png',
+                link:'https://drive.google.com/file/d/1iekkl_0vpubkp7kVXoNSdV_mkE7tJubj/view?usp=sharing'
+            }
+        ]
     },
     // {
     //     id: 4,
@@ -182,7 +251,37 @@ const documents = [
         des: 'This is a ducument',
         subject: 0,
         grade: 1,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade2/nguyHiem.png',
+                link:'https://drive.google.com/file/d/16RJ4PAFtHzd3teqT0CW_b2X6Ebf2oObT/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/nguyHiem2.png',
+                link:'https://drive.google.com/file/d/1WFDnlY1TYn9ykwov99C8QWd3wjKfXZGE/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/nguyHiem3.png',
+                link:'https://drive.google.com/file/d/1Svr5Ieh0UhBMpnH744lH7BxbJzU-MrNo/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/nguyHiem4.png',
+                link:'https://drive.google.com/file/d/1MDBdxNLqlnD8f50xtoJd3bVzpWfmBqRk/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/doDungHocTap.png',
+                link:'https://drive.google.com/file/d/1ndSf-H-8V4wpLvnhF246h5Gh0VxYUHGL/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/gk1.png',
+                link:'https://docs.google.com/presentation/d/1xFHpZQitNxqY0qVuTspnQmAJ55ZTdPtN/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true'
+            },
+            {
+                img:'/documentImg/grade2/gk2.png',
+                link:'https://docs.google.com/presentation/d/1iAByzq0R9krpzC9B561dMnS7UcK25CXv/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true'
+            },
+        ]
     },
     {
         id: 11,
@@ -190,7 +289,21 @@ const documents = [
         des: 'This is a ducument',
         subject: 1,
         grade: 1,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade2/btapCuoiTuan.png',
+                link:'https://drive.google.com/file/d/1MXe61pJnrx2-_oc-bKUHZO6c4HAgc46K/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/btapTuan.png',
+                link:'https://drive.google.com/file/d/1Np4LVrru-Z_4FmzNxbCSpUOFSTJgCjnC/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/gkToan1.png',
+                link:'https://docs.google.com/presentation/d/1hIH-OgyWTDvYshzFjkefUNuUAWh6R-1-/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true'
+            },
+        ]
     },
     {
         id: 12,
@@ -198,7 +311,17 @@ const documents = [
         des: 'This is a ducument',
         subject: 2,
         grade: 1,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade2/daoDuc3.png',
+                link:'https://drive.google.com/file/d/1B2C0_Q7_iMKLd0F7AKNoRexgummiWYhe/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/daoDuc4.png',
+                link:'https://drive.google.com/file/d/1-v720NZA474SIBV8eLKaOaFn0i1gLxot/view?usp=sharing'
+            }
+        ]
     },
     {
         id: 13,
@@ -206,7 +329,21 @@ const documents = [
         des: 'This is a ducument',
         subject: 3,
         grade: 1,
-        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1'
+        img: 'https://www.wfla.com/wp-content/uploads/sites/71/2023/05/GettyImages-1389862392.jpg?w=2560&h=1440&crop=1',
+        docs: [
+            {
+                img:'/documentImg/grade2/heTieuHoa.png',
+                link:'https://drive.google.com/file/d/1ZRBbcKmBSNWQWtKol1n8djQP_ehml9Jt/view?usp=sharing'
+            },
+            {
+                img:'/documentImg/grade2/coTheEm.png',
+                link:'https://docs.google.com/presentation/d/1K1eQguzsJ0nZfIw2DNR2MusgQpxNHcOL/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true'
+            },
+            {
+                img:'/documentImg/grade2/ruaTay.png',
+                link:'https://docs.google.com/presentation/d/1Og8pdg6sVHytJ9ZZRpffcosx2EDnDDKC/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true'
+            },
+        ]
     },
     // {
     //     id: 14,
@@ -606,12 +743,32 @@ export default function TeachingDocument() {
                                             <div className={styles.doctext} style={{margin:'10px 0 0 0'}}>
                                                 Môn học: {listSubject.find(s => s.id == d.subject)?.name}
                                             </div>
-                                            <div style={{margin:'20px 0 0 0'}} className={styles.gameDownLoad}>
+                                            {/* <div style={{margin:'20px 0 0 0'}} className={styles.gameDownLoad}>
                                                 <a className={styles.downloadLink} href={d.link} target='_blank'>Tải về</a>
+                                            </div> */}
+                                            <div className={styles.doctext} style={{margin:'10px 0 0 0'}}>
+                                                Tổng số tài liệu: {d.docs?.length}
                                             </div>
                                         </div>
                                         <div className={styles.docImg}>
-                                            <img src={d.img} className={styles.docImage}></img>
+                                            <Carousel
+                                                showArrows={true} // Enable navigation arrows
+                                                showThumbs={false} // Disable thumbnails (optional)
+                                                infiniteLoop={true} // Enable continuous looping
+                                                autoPlay={true} // Enable automatic play
+                                                interval={2000} // Adjust interval as needed (in milliseconds)
+                                                >
+                                                {d.docs.map((slide, index) => (
+                                                    <div key={index} className="slide">
+                                                        <img style={{width: '100%', height: '400px', objectFit: 'cover'}} src={slide.img} alt={slide.altText} />
+                                                        <div style={{width:'100%',display:'flex',justifyContent:'center',marginBottom:'40px'}}>
+                                                            <div style={{margin:'20px 0 0 0'}} className={styles.gameDownLoad}>
+                                                                <a className={styles.downloadLink} href={slide.link} target='_blank'>Tải về</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </Carousel>
                                         </div>
                                     </div>
                                 )}
@@ -631,12 +788,32 @@ export default function TeachingDocument() {
                                             <div className={styles.doctext} style={{margin:'10px 0 0 0'}}>
                                                 Môn học: {listSubject.find(s => s.id == d.subject)?.name}
                                             </div>
-                                            <div style={{margin:'20px 0 0 0'}} className={styles.gameDownLoad}>
+                                            {/* <div style={{margin:'20px 0 0 0'}} className={styles.gameDownLoad}>
                                                 <a className={styles.downloadLink} href={d.link} target='_blank'>Tải về</a>
+                                            </div> */}
+                                            <div className={styles.doctext} style={{margin:'10px 0 0 0'}}>
+                                                Tổng số tài liệu: {d.docs?.length}
                                             </div>
                                         </div>
                                         <div className={styles.docImg}>
-                                            <img src={d.img} className={styles.docImage}></img>
+                                            <Carousel
+                                                showArrows={true} // Enable navigation arrows
+                                                showThumbs={false} // Disable thumbnails (optional)
+                                                infiniteLoop={true} // Enable continuous looping
+                                                autoPlay={true} // Enable automatic play
+                                                interval={3000} // Adjust interval as needed (in milliseconds)
+                                                >
+                                                {d?.docs?.map((slide, index) => (
+                                                    <div key={index} className="slide">
+                                                        <img style={{width: '100%', height: '400px', objectFit: 'contain'}} src={slide.img} alt={slide.altText} />
+                                                        <div style={{width:'100%',display:'flex',justifyContent:'center',marginBottom:'40px'}}>
+                                                            <div style={{margin:'20px 0 0 0'}} className={styles.gameDownLoad}>
+                                                                <a className={styles.downloadLink} href={slide.link} target='_blank'>Tải về</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </Carousel>
                                         </div>
                                     </div>
                                 )}

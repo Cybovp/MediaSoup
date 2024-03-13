@@ -290,6 +290,22 @@ const games = [
         img: '/gameImg/mrHowMuchVsMrHowMany.png',
         link: 'https://docs.google.com/presentation/d/1ZykiUwA2vkgSHuKdsPEp6CLgdtgnGBTM/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
     },
+    {
+        id: 34,
+        type: 1,
+        name: 'Khỉ con leo núi',
+        des: 'Is a game',
+        img: '/gameImg/khiConLeoNui.png',
+        link: 'https://docs.google.com/presentation/d/1Dd5IosTFgAkK4HHhI8LX1R8oVaVTLJfs/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 35,
+        type: 1,
+        name: 'Lật mảnh ghép',
+        des: 'Is a game',
+        img: '/gameImg/latManhGhep.png',
+        link: 'https://docs.google.com/presentation/d/1CmnApdNLKnVDJntH2yGjSDKrdDkeWePw/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
 ]
 export default function TeachingGame() {
     const [activeItem, setActiveItem] = useState(null);
