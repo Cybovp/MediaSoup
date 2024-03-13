@@ -40,12 +40,12 @@ export default function Footer() {
                         }}>
                             Liên hệ
                         </div> 
-                        <div>
+                        {/* <div>
                             0000000000
                         </div>
                         <div>
                             meo@gmail.com
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className={styles.rigtFooter}>
