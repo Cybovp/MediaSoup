@@ -19,6 +19,70 @@ const ListGameTypes = [
 ]
 const games = [
     {
+        id: 26,
+        type: 0,
+        name: 'Part Of The Body',
+        des: 'Is a game',
+        img: '/gameImg/partOfTheBody.png',
+        link: 'https://docs.google.com/presentation/d/1cZvG6Sua7Jnhj69V0YF0gaKRcMdjwEKs/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 27,
+        type: 0,
+        name: 'Animals Guess',
+        des: 'Is a game',
+        img: '/gameImg/animalsGuess.png',
+        link: 'https://docs.google.com/presentation/d/1sWe8kmY1_HdrBCST-jsxXLVPi_0kbbvp/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 28,
+        type: 0,
+        name: 'Compartives And Superlatives',
+        des: 'Is a game',
+        img: '/gameImg/compartivesAndSuperlatives.png',
+        link: 'https://docs.google.com/presentation/d/1WBYJv3Qye77MbGf_KWSPWKs1789bWQEh/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 29,
+        type: 0,
+        name: 'Daily Routines',
+        des: 'Is a game',
+        img: '/gameImg/dailyRoutines.png',
+        link: 'https://docs.google.com/presentation/d/1vFuoNC7GUmHMq1CI2dZ5B8M_60sr66LV/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 30,
+        type: 0,
+        name: 'Old MacDonald Farm',
+        des: 'Is a game',
+        img: '/gameImg/oldMacDonaldFarm.png',
+        link: 'https://docs.google.com/presentation/d/15wBT7SbIdR5maxE5f2Z6NZe1HVuJHqFs/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 31,
+        type: 0,
+        name: 'Fast Food Wheel',
+        des: 'Is a game',
+        img: '/gameImg/fastFoodWheel.png',
+        link: 'https://docs.google.com/presentation/d/1UWRWZJvoSZzsO7pMGoFDT_3BuzT3RhqZ/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 32,
+        type: 0,
+        name: 'Jeoparody',
+        des: 'Is a game',
+        img: '/gameImg/jeoparody.png',
+        link: 'https://docs.google.com/presentation/d/1SnsIsiq-Tg829GotoW3J-3CSPps_mzTQ/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
+        id: 33,
+        type: 0,
+        name: 'Mr HowMuch Vs Mr How Many',
+        des: 'Is a game',
+        img: '/gameImg/mrHowMuchVsMrHowMany.png',
+        link: 'https://docs.google.com/presentation/d/1ZykiUwA2vkgSHuKdsPEp6CLgdtgnGBTM/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
+    },
+    {
         id: 0,
         type: 0,
         name: 'Class Room Object',
@@ -227,70 +291,6 @@ const games = [
         link: 'https://docs.google.com/presentation/d/1f8U5JffirkZj2u5GUHgWQai8nDPyF-j2/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
     },
     {
-        id: 26,
-        type: 0,
-        name: 'Part Of The Body',
-        des: 'Is a game',
-        img: '/gameImg/partOfTheBody.png',
-        link: 'https://docs.google.com/presentation/d/1cZvG6Sua7Jnhj69V0YF0gaKRcMdjwEKs/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
-        id: 27,
-        type: 0,
-        name: 'Animals Guess',
-        des: 'Is a game',
-        img: '/gameImg/animalsGuess.png',
-        link: 'https://docs.google.com/presentation/d/1sWe8kmY1_HdrBCST-jsxXLVPi_0kbbvp/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
-        id: 28,
-        type: 0,
-        name: 'Compartives And Superlatives',
-        des: 'Is a game',
-        img: '/gameImg/compartivesAndSuperlatives.png',
-        link: 'https://docs.google.com/presentation/d/1WBYJv3Qye77MbGf_KWSPWKs1789bWQEh/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
-        id: 29,
-        type: 0,
-        name: 'Daily Routines',
-        des: 'Is a game',
-        img: '/gameImg/dailyRoutines.png',
-        link: 'https://docs.google.com/presentation/d/1vFuoNC7GUmHMq1CI2dZ5B8M_60sr66LV/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
-        id: 30,
-        type: 0,
-        name: 'Old MacDonald Farm',
-        des: 'Is a game',
-        img: '/gameImg/oldMacDonaldFarm.png',
-        link: 'https://docs.google.com/presentation/d/15wBT7SbIdR5maxE5f2Z6NZe1HVuJHqFs/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
-        id: 31,
-        type: 0,
-        name: 'Fast Food Wheel',
-        des: 'Is a game',
-        img: '/gameImg/fastFoodWheel.png',
-        link: 'https://docs.google.com/presentation/d/1UWRWZJvoSZzsO7pMGoFDT_3BuzT3RhqZ/edit?usp=sharing&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
-        id: 32,
-        type: 0,
-        name: 'Jeoparody',
-        des: 'Is a game',
-        img: '/gameImg/jeoparody.png',
-        link: 'https://docs.google.com/presentation/d/1SnsIsiq-Tg829GotoW3J-3CSPps_mzTQ/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
-        id: 33,
-        type: 0,
-        name: 'Mr HowMuch Vs Mr How Many',
-        des: 'Is a game',
-        img: '/gameImg/mrHowMuchVsMrHowMany.png',
-        link: 'https://docs.google.com/presentation/d/1ZykiUwA2vkgSHuKdsPEp6CLgdtgnGBTM/edit?usp=drive_link&ouid=105162719495193298319&rtpof=true&sd=true',
-    },
-    {
         id: 34,
         type: 1,
         name: 'Khỉ con leo núi',
@@ -352,7 +352,7 @@ export default function TeachingGame() {
                         </div>
                     </div>
                     {ListGameTypes.map(k => (
-                        <div onClick={()=>setGameKind(k.id)} className={styles.gameKind}>
+                        <div key={k.id} onClick={()=>setGameKind(k.id)} className={styles.gameKind}>
                             {k.name}
                         </div>
                     ))}
@@ -361,7 +361,7 @@ export default function TeachingGame() {
                     {fitleredGames?.filter(g => g.type == gameKind)
                         .slice((currentPage) * itemsPerPage, (currentPage + 1) * itemsPerPage)
                         .map(g => (
-                            <div onMouseEnter={()=>setActiveItem(g.id)} onMouseLeave={()=>setActiveItem(null)} className={styles.game}>
+                            <div key={g.id} onMouseEnter={()=>setActiveItem(g.id)} onMouseLeave={()=>setActiveItem(null)} className={styles.game}>
                                 <Image width={360} height={300} className={styles.gameImage} src={g.img}/>
                                 {activeItem == g.id && (
                                     <div className={styles.gameDes}>
