@@ -86,18 +86,23 @@ export default function Home (){
                     <div className={styles.imageSection}> 
                         <div className={styles.ImageColumn}>
                             <div className={styles.ImageBig}>
-                                <img className={styles.image} src='/gameImg/HomeImg/songHoAo.png'></img>
+                                <img className={styles.image} src='/gameImg/HomeImg/khamPha.png'></img>
                             </div>
                             <div className={styles.ImageBig}>
-                                <img className={styles.image} src='/gameImg/HomeImg/giacQuan.png'></img>
+                                <img className={styles.image} src='/gameImg/HomeImg/mayGio.png'></img>
                             </div>
                         </div>
                         <div className={styles.ImageColumn}>
                             <div className={styles.ImageBig}>
-                                <img className={styles.image} src='/gameImg/HomeImg/canhHoa.png'></img>
+                                <img className={styles.image} src='/gameImg/HomeImg/ngoDoc.png'></img>
                             </div>
                             <div className={styles.ImageBig}>
-                                <img className={styles.image} src='/gameImg/HomeImg/rung.png'></img>
+                                <img className={styles.image} src='/gameImg/HomeImg/tuThe.png'></img>
+                            </div>
+                        </div>
+                        <div className={styles.ImageColumn}>
+                            <div className={styles.ImageBig2}>
+                                <img className={styles.image} src='/gameImg/HomeImg/docHieu.png'></img>
                             </div>
                         </div>
                     </div>
