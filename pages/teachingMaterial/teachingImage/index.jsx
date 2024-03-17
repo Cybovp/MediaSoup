@@ -105,16 +105,19 @@ export default function TeachingImage(){
                         </div>
                     </div>
                     <div className={styles.forthSection}>
-                        <div className={`${styles.sect4img1} ${quadImgOpacity == 1 && styles.opacity1}`}>
+                        <div className={styles.sect4img1}>
+                            {/* <img className={styles.img} src='https://hips.hearstapps.com/hmg-prod/images/red-hot-air-balloons-over-jungle-nyaung-u-mandalay-royalty-free-image-1693419727.jpg?crop=0.681xw:1.00xh;0.272xw,0&resize=640:*'/> */}
+                        </div>
+                        <div className={`${styles.sect4img2} ${quadImgOpacity == 1 && styles.opacity1}`}>
                             <img className={styles.img} src='https://png.pngtree.com/background/20230512/original/pngtree-nature-background-sunset-wallpaer-with-beautiful-flower-farms-picture-image_2503007.jpg'/>
                         </div>
-                        <div className={`${styles.sect4img2} ${quadImgOpacity == 2 && styles.opacity1}`}>
+                        <div className={`${styles.sect4img3} ${quadImgOpacity == 2 && styles.opacity1}`}>
                             <img className={styles.img} src='https://www.usnews.com/object/image/00000162-f3bb-d0d5-a57f-fbfb3eef0000/32-lake-louise.jpg?update-time=1677094961403&size=responsive640'/>
                         </div>
-                        <div className={`${styles.sect4img3} ${quadImgOpacity == 3 && styles.opacity1}`}>
+                        <div className={`${styles.sect4img4} ${quadImgOpacity == 3 && styles.opacity1}`}>
                             <img className={styles.img} src='https://www.myglobalviewpoint.com/wp-content/uploads/2023/08/Most-Beautiful-Places-in-Greece-Featured-Image.jpg'/>
                         </div>
-                        <div className={`${styles.sect4img4} ${quadImgOpacity == 4 && styles.opacity1}`}>
+                        <div className={`${styles.sect4img5} ${quadImgOpacity == 4 && styles.opacity1}`}>
                             <img className={styles.img} src='https://static.vecteezy.com/system/resources/previews/032/259/695/non_2x/beautiful-peacock-in-the-water-flowers-house-nature-wallpaper-hd-wallpaper-ai-generated-free-photo.jpg'/>
                         </div>
                     </div>

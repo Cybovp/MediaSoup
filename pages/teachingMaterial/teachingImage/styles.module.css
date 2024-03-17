@@ -44,7 +44,7 @@
     width: 250px;
     height: 250px;
     background-color: red;
-    z-index: 100;
+    z-index: 90;
     border-radius: 10px;
     opacity: 0.5;
     transform: rotateX(-20deg) rotateY(-20deg);
@@ -65,7 +65,7 @@
     width: 250px;
     height: 250px;
     background-color: yellow;
-    z-index: 110;
+    z-index: 90;
     position: absolute;
     margin-left: 100px;
     margin-bottom: 100px;
@@ -168,14 +168,14 @@
     height: 800px;
     display: flex;
     align-items: center;
-    padding-left: 150px;
+    justify-content: center;
 }
 .sect4img1{
     width: 500px;
     height: 300px;
-    background-color: red;
+    background-color: #fff;
     z-index: 90;
-    opacity: 0.5;
+    opacity: 0;
     border-radius: 10px;
 }
 .sect4img2{
@@ -184,7 +184,6 @@
     background-color: blue;
     z-index: 90;
     position: absolute;
-    margin-left: 25%;
     margin-bottom: 25%;
     z-index: 90;
     opacity: 0.5;
@@ -207,8 +206,18 @@
     background-color: green;
     z-index: 90;
     position: absolute;
-    margin-left: 25%;
     margin-top: 25%;
+    z-index: 90;
+    opacity: 0.5;
+    border-radius: 10px;
+}
+.sect4img5{
+    width: 500px;
+    height: 300px;
+    background-color: green;
+    z-index: 90;
+    position: absolute;
+    margin-right: 50%;
     z-index: 90;
     opacity: 0.5;
     border-radius: 10px;
@@ -249,14 +258,14 @@
         height: 100px;
     }
     .sencondSection{
-        height: 200px;
+        height: 300px;
     }
     .thirdSection{
-        height: 800px;
+        height: 100%;
     }
     .section31{ 
         flex-direction: column;
-        height: 800px;
+        height: 100%;
         gap: 20px;
     }
     .section311{
@@ -271,14 +280,14 @@
     }
     .sect3Img{
         width: 100%;
+        height: 150px;
     }
     .forthSection{
-        margin-top: 50px;
+        margin: 100px 0 100px 0;
         padding-left: 0;
-        height: 200px;
-        padding-left: 20px;
+        height: 100%;
     }
-    .sect4img1 , .sect4img2 , .sect4img3 , .sect4img4 {
+    .sect4img1 , .sect4img2 , .sect4img3 , .sect4img4, .sect4img5 {
         width: 125px;
         height: 75px;
     }
