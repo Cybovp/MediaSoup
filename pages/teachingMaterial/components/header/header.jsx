@@ -15,7 +15,7 @@ export default function Header() {
                         <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Trang chủ</Link>
                     </div>
                     <div className={styles.headerNavigation}>
-                        Hình ảnh trực quan
+                        <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial/teachingImage">Hình ảnh trực quan</Link>
                     </div>
                     <div className={styles.headerNavigation}>
                         Video
@@ -38,7 +38,7 @@ export default function Header() {
                     <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial">Trang chủ</Link>
                 </div>
                 <div className={styles.headerNavigation}>
-                    Hình ảnh trực quan
+                    <Link className={styles.link} href="https://media-soup.vercel.app/teachingMaterial/teachingImage">Hình ảnh trực quan</Link>
                 </div>
                 <div className={styles.headerNavigation}>
                     Video
