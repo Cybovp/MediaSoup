@@ -46,7 +46,7 @@
     background-color: red;
     border-radius: 10px;
     opacity: 0.5;
-    /* transform: rotateX(-20deg) rotateY(-20deg); */
+    transform: rotateX(-20deg) rotateY(-20deg);
 }
 .stackImg2{
     width: 400px;
@@ -57,7 +57,7 @@
     margin-top: 20px;
     border-radius: 10px;
     opacity: 0.5;
-    /* transform: rotateX(-20deg) rotateY(-20deg); */
+    transform: rotateX(-20deg) rotateY(-20deg);
 }
 .stackImg3{
     width: 400px;
@@ -68,7 +68,7 @@
     margin-bottom: 20px;
     border-radius: 10px;
     opacity: 0.5;
-    /* transform: rotateX(-20deg) rotateY(-20deg); */
+    transform: rotateX(-20deg) rotateY(-20deg);
 }
 .opacity1{
     opacity: 1 !important;
@@ -217,6 +217,12 @@
     border-radius: 10px;
 }
 @media (max-width: 900px){
+    .stackImg1 , .stackImg2 , .stackImg3{
+        transform: none;
+    }
+    .sect2Img1 , .sect2Img2 , .sect2Img3{
+        transform: none;
+    }
     .mainContent{
         margin-top: 50px;
     }
