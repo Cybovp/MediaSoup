@@ -87,7 +87,6 @@
     background-color: red;
     border-radius: 10px;
     transform: rotateX(-20deg) rotateY(10deg);
-    z-index: 90;
     opacity: 0.5;
 }
 .sect2Img2{
@@ -97,7 +96,6 @@
     border-radius: 10px;
     transform: rotateX(-20deg) rotateY(-10deg);
     position: absolute;
-    z-index: 90;
     margin-right: 50%;
     opacity: 0.5;
 }
@@ -108,7 +106,6 @@
     border-radius: 10px;
     transform: rotateX(-20deg) rotateY(-10deg);
     position: absolute;
-    z-index: 90;
     margin-left: 50%;
     opacity: 0.5;
 }
