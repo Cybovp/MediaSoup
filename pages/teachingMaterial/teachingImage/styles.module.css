@@ -219,7 +219,6 @@
 @media (max-width: 900px){
     .stackImg1 , .stackImg2 , .stackImg3{
         transform: none;
-        -webkit-transform: rotateX(-20deg) rotateY(-20deg);
     }
     .sect2Img1 , .sect2Img2 , .sect2Img3{
         transform: none;
