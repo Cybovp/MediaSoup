@@ -44,7 +44,6 @@
     width: 400px;
     height: 400px;
     background-color: red;
-    z-index: 90;
     border-radius: 10px;
     opacity: 0.5;
     transform: rotateX(-20deg) rotateY(-20deg);
@@ -53,7 +52,6 @@
     width: 400px;
     height: 400px;
     background-color: blue;
-    z-index: 90;
     position: absolute;
     margin-right: 20px;
     margin-top: 20px;
@@ -65,7 +63,6 @@
     width: 400px;
     height: 400px;
     background-color: yellow;
-    z-index: 90;
     position: absolute;
     margin-left: 20px;
     margin-bottom: 20px;
