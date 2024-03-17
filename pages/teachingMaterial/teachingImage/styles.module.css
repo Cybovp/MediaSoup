@@ -21,7 +21,7 @@
 }
 .firstSection{
     width: 100%;
-    height: 400px;
+    height: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -29,7 +29,7 @@
 }
 .colection1{
     width: 100%;
-    height: 400px;
+    height: 100%;
     display: flex;
     justify-content: space-evenly;
 }
@@ -41,8 +41,8 @@
     align-items: center;
 }
 .stackImg1{
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     background-color: red;
     z-index: 90;
     border-radius: 10px;
@@ -50,25 +50,25 @@
     transform: rotateX(-20deg) rotateY(-20deg);
 }
 .stackImg2{
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     background-color: blue;
     z-index: 90;
     position: absolute;
-    margin-right: 100px;
-    margin-top: 100px;
+    margin-right: 20px;
+    margin-top: 20px;
     border-radius: 10px;
     opacity: 0.5;
     transform: rotateX(-20deg) rotateY(-20deg);
 }
 .stackImg3{
-    width: 250px;
-    height: 250px;
+    width: 400px;
+    height: 400px;
     background-color: yellow;
     z-index: 90;
     position: absolute;
-    margin-left: 100px;
-    margin-bottom: 100px;
+    margin-left: 20px;
+    margin-bottom: 20px;
     border-radius: 10px;
     opacity: 0.5;
     transform: rotateX(-20deg) rotateY(-20deg);
@@ -171,53 +171,53 @@
     justify-content: center;
 }
 .sect4img1{
-    width: 500px;
-    height: 300px;
+    width: 800px;
+    height: 600px;
     background-color: #fff;
     z-index: 90;
     opacity: 0;
     border-radius: 10px;
 }
 .sect4img2{
-    width: 500px;
-    height: 300px;
+    width: 800px;
+    height: 600px;
     background-color: blue;
     z-index: 90;
     position: absolute;
-    margin-bottom: 25%;
+    margin-bottom: 100px;
     z-index: 90;
     opacity: 0.5;
     border-radius: 10px;
 }
 .sect4img3{
-    width: 500px;
-    height: 300px;
+    width: 800px;
+    height: 600px;
     background-color: yellow;
     z-index: 90;
     position: absolute;
-    margin-left: 50%;
+    margin-left: 100px;
     z-index: 90;
     opacity: 0.5;
     border-radius: 10px;
 }
 .sect4img4{
-    width: 500px;
-    height: 300px;
+    width: 800px;
+    height: 600px;
     background-color: green;
     z-index: 90;
     position: absolute;
-    margin-top: 25%;
+    margin-top: 100px;
     z-index: 90;
     opacity: 0.5;
     border-radius: 10px;
 }
 .sect4img5{
-    width: 500px;
-    height: 300px;
+    width: 800px;
+    height: 600px;
     background-color: green;
     z-index: 90;
     position: absolute;
-    margin-right: 50%;
+    margin-right: 100px;
     z-index: 90;
     opacity: 0.5;
     border-radius: 10px;
@@ -226,36 +226,46 @@
     .mainContent{
         margin-top: 50px;
     }
+    .colection1{
+        flex-direction: column;
+        gap: 50px;
+        align-items: center;
+    }
+    .stackSection{
+        width: 100%;
+    }
     .stackImg1{
-        width: 80px;
-        height: 80px;
+        width: 250px;
+        height: 250px;
     }
     .stackImg2{
-        width: 80px;
-        height: 80px;
-        margin-right: 25px;
-        margin-top: 25px;
+        width: 250px;
+        height: 250px;
+        margin-right: 20px;
+        margin-top: 20px;
     }
     .stackImg3{
-        width: 80px;
-        height: 80px;
-        margin-left: 25px;
-        margin-bottom: 25px;
+        width: 250px;
+        height: 250px;
+        margin-left: 20px;
+        margin-bottom: 20px;
     }
     .firstSection{
-        height: 200px;
+        height: 100%
     }
     .sect2Img1{
-        width: 150px;
-        height: 100px;
+        width: 300px;
+        height: 200px;
     }
     .sect2Img2{
-        width: 150px;
-        height: 100px;
+        width: 300px;
+        height: 200px;
+        margin-right: 20px;
     }
     .sect2Img3{
-        width: 150px;
-        height: 100px;
+        width: 300px;
+        height: 200px;
+        margin-left: 20px;
     }
     .sencondSection{
         height: 300px;
@@ -288,7 +298,7 @@
         height: 100%;
     }
     .sect4img1 , .sect4img2 , .sect4img3 , .sect4img4, .sect4img5 {
-        width: 125px;
-        height: 75px;
+        width: 250px;
+        height: 150px;
     }
 }
