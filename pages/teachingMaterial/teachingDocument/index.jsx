@@ -58,11 +58,11 @@ const listSubject = [
     //     type: 'subject',
     //     name: 'Tin học'
     // },
-    // {
-    //     id: 11,
-    //     type: 'subject',
-    //     name: 'Hoạt động trải nghiệm'
-    // },
+    {
+        id: 11,
+        type: 'subject',
+        name: 'HĐTN'
+    },
     {
         id: 10,
         type: 'subject',
