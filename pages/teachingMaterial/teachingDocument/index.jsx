@@ -26,7 +26,7 @@ const listSubject = [
     {
         id: 3,
         type: 'subject',
-        name: 'Tự nhiên và Xã hội'
+        name: 'TN & XH'
     },
     // {
     //     id: 4,
@@ -58,11 +58,11 @@ const listSubject = [
     //     type: 'subject',
     //     name: 'Tin học'
     // },
-    {
-        id: 11,
-        type: 'subject',
-        name: 'Hoạt động trải nghiệm'
-    },
+    // {
+    //     id: 11,
+    //     type: 'subject',
+    //     name: 'Hoạt động trải nghiệm'
+    // },
     {
         id: 10,
         type: 'subject',
